@@ -11,7 +11,7 @@ const authRoutes = require('./routes/auth.routes')
 app.use(cors({origin: '*'}));
 app.use(express.json());
 
-app.use('/api', authRoutes)
+app.use('/api/auth', authRoutes)
 
 
 
