@@ -1,22 +1,30 @@
 const userService = require('../service/user.service')
 const { validationResult } = require('express-validator')
-
+const ApiError = require('../exceptions/apiError')
 
 class UserController {
-    async signUp(req, res) {
-       
+    async signUp(req, res, next) {
         try {
             const errors = validationResult(req);
-            if (!errors.isEmpty()) return res.status(400).json('validation Error')
-            const { email, password } = req.body
+            if (!errors.isEmpty()) return next(ApiError.BadRequestError('Validation error', errors.array()))
+            const { email, password } = req.body;
             const userData = await userService.signUp(email, password)
             res.status(201).json(userData)
-        } catch (error) {
-            console.log(error)
-            res.send({ message: 'Server Error' })
+        } catch (e) {
+            next(e)
         }
     }
-
+    async signIn(req, res, next) {
+        try {
+            const { email, password } = req.body
+            const user = await userService.signIn(email, password)
+            res.cookie('refreshToken', user.refreshToken, {maxAge: 15 * 86400000, httpOnly: true})
+            return res.json(user)
+        } catch (e) {
+            next(e)
+        }
+    }
 }
 
 module.exports = new UserController()
+

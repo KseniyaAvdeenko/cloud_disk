@@ -9,9 +9,10 @@ router.post('/sign_up',
     userController.signUp
 )
 
-router.post('/sign_in',
-    body('email').isEmail(),
-    body('password').isLength({ min: 3 }),
-    userController.signUp
-)
+router.post('/sign_in', userController.signIn)
+
+
+
+
+
 module.exports = router
