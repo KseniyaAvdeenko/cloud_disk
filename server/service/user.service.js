@@ -13,6 +13,7 @@ class UserService {
     }
     async signIn(email, password){
         const user = await User.findOne({email: email});
+        console.log(user)
         if(!user){ throw ApiError.BadRequestError(`User does not exist`, [])}
         const isPassEqual = bcrypt.compare(password, user.password)
         if (!isPassEqual) {throw ApiError.BadRequestError(`Incorrect password`, [])}

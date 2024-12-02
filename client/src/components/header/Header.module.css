@@ -1,12 +1,58 @@
+.d-flex, .header__auth, .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.grid {
+  display: -ms-grid;
+  display: grid;
+}
+
+.commonButton, .header__auth > button {
+  padding: 1.5rem 2.5rem;
+  width: fit-content;
+  background-color: #1F3A5F;
+  border-radius: 1.5rem;
+  border: none;
+  outline: none;
+  color: #FFFFFF;
+  font-size: 1.8rem;
+  transition: all 0.5s ease;
+}
+.commonButton:hover, .header__auth > button:hover, .commonButton:active, .header__auth > button:active {
+  background: #3D5A80;
+}
+
 .header {
   width: 100%;
   padding: 3rem 10%;
   border-bottom: 0.1rem solid #acc2ef;
-  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
-  justify-content: flex-end;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: end;
 }
-.header > div > button {
+.header__auth {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: start;
+  width: max-content;
+}
+.header__auth > button {
   margin: 0 1rem;
 }
 

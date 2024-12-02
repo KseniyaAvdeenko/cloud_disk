@@ -3,7 +3,7 @@ import styles from './Layout.module.sass'
 import Header from "../header/Header";
 
 interface ILayoutProps{
-    children: React.ReactNode
+    children: React.ReactNode;
 }
 const Layout: FC<ILayoutProps> = ({children}) => {
     return (

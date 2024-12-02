@@ -6,10 +6,63 @@ $primary100: #1F3A5F
 $primary200: #4d648d
 $primary300: #acc2ef
 
-$accent100:#3D5A80
-$accent200:#cee8ff
+$accent100: #3D5A80
+$accent200: #cee8ff
 
 $text100: #FFFFFF
 $text200: #e0e0e0
 
 
+.d-flex
+  display: -webkit-box
+  display: -ms-flexbox
+  display: flex
+
+
+@mixin flex-dir($dir)
+  @if $dir == row
+    -webkit-box-orient: horizontal
+  @if $dir == column
+    -webkit-box-orient: vertical
+  -webkit-box-direction: normal
+  -ms-flex-direction: $dir
+  flex-direction: $dir
+
+@mixin flex-jc($value)
+  @if $value ==space-between
+    -webkit-box-pack: justify
+    -ms-flex-pack: justify
+  @else if $value == space-around
+      -ms-flex-pack: distribute
+  @else
+    -webkit-box-pack:  $value
+    -ms-flex-pack:  $value
+  justify-content:  $value
+
+
+@mixin flex($direction, $jc, $ai)
+  @extend .d-flex
+  @include flex-dir($direction)
+  -webkit-box-align: $ai
+  -ms-flex-align: $ai
+  align-items: $ai
+  @include flex-jc($jc)
+
+.grid
+  display: -ms-grid
+  display: grid
+
+
+.commonButton
+  padding: 1.5rem 2.5rem
+  width: fit-content
+  background-color: $primary100
+  border-radius: 1.5rem
+  border: none
+  outline: none
+  color: $text100
+  font-size: 1.8rem
+  transition: all .5s ease
+
+  &:hover, &:active
+    background: $accent100

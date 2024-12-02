@@ -1,0 +1,51 @@
+@import "../../App.module"
+
+.authForms
+  width: 100%
+  height: 100%
+  padding: 4rem 10%
+  @include flex(column, center, center)
+
+.authForm
+  &__outer
+    border-radius: 1rem
+    border: .1rem solid $accent200
+    padding: 2rem
+    width: 40%
+    @include flex(column, center, center)
+    & > h1
+      margin: 0 0 1rem
+      font:
+        weight: 700
+        size: 4.9rem
+        family: inherit
+  &__inner
+    margin: 1rem 0
+    width: 100%
+    @include flex(column, center, center)
+    & > button
+      @extend .commonButton
+
+.authInputContainer
+  width: 100%
+  margin-bottom: 2rem
+  @include flex(column, center, start)
+
+  & > label
+    margin-bottom: 1rem
+    font-size: 1.8rem
+
+  & > input
+    width: 100%
+    padding: 1rem
+    border-radius: 1rem
+    border: none
+    outline: none
+    color: $bg100
+    transition: all .5s ease
+
+    &:focus
+      border: none
+      outline: none
+    &::placeholder
+      color: $bg300

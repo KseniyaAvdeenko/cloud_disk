@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {useAppSelector} from "./hooks/useAppSelector";
 import {useAppDispatch} from "./hooks/useAppDispatch";
 import {checkAuth} from "./store/actions/authAction";
@@ -17,11 +17,16 @@ function App() {
             dispatch(getCurrentUser())
         }
     }, [accessToken])
+
     return !isAuth ? (
-        <Layout>
+        <Layout >
             <AuthForms/>
         </Layout>
-    ) : (<Layout>happy hacking {currentUser && currentUser.email}</Layout>);
+    ) : (
+        <Layout>
+            happy hacking {currentUser && currentUser.email}
+        </Layout>
+    );
 }
 
 export default App;

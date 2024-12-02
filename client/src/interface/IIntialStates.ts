@@ -12,3 +12,9 @@ export interface INtfInitialState{
 export interface IUserInitialState{
     currentUser: IUser | null
 }
+
+export interface IAuthFormsInitial{
+    activeForm: 'signIn' | 'signUp';
+    signInFormDisplay: 'flex'|'none'
+    signUpFormDisplay: 'flex'|'none'
+}

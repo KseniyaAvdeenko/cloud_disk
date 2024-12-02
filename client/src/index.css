@@ -9,8 +9,9 @@ html {
 }
 
 body {
-    font-family: Broadway sans-serif;
+    font-family: Roboto sans-serif;
     color: #FFFFFF;
+    font-size: 1.6rem;
 }
 
 #root {

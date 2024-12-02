@@ -1,0 +1,114 @@
+.d-flex, .authInputContainer, .authForm__inner, .authForm__outer, .authForms {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.grid {
+  display: -ms-grid;
+  display: grid;
+}
+
+.commonButton, .authForm__inner > button {
+  padding: 1.5rem 2.5rem;
+  width: fit-content;
+  background-color: #1F3A5F;
+  border-radius: 1.5rem;
+  border: none;
+  outline: none;
+  color: #FFFFFF;
+  font-size: 1.8rem;
+  transition: all 0.5s ease;
+}
+.commonButton:hover, .authForm__inner > button:hover, .commonButton:active, .authForm__inner > button:active {
+  background: #3D5A80;
+}
+
+.authForms {
+  width: 100%;
+  height: 100%;
+  padding: 4rem 10%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.authForm__outer {
+  border-radius: 1rem;
+  border: 0.1rem solid #cee8ff;
+  padding: 2rem;
+  width: 40%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.authForm__outer > h1 {
+  margin: 0 0 1rem;
+  font-weight: 700;
+  font-size: 4.9rem;
+  font-family: inherit;
+}
+.authForm__inner {
+  margin: 1rem 0;
+  width: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.authInputContainer {
+  width: 100%;
+  margin-bottom: 2rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.authInputContainer > label {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+.authInputContainer > input {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  color: #0F1C2E;
+  transition: all 0.5s ease;
+}
+.authInputContainer > input:focus {
+  border: none;
+  outline: none;
+}
+.authInputContainer > input::placeholder {
+  color: #374357;
+}
+
+/*# sourceMappingURL=AuthForms.module.css.map */

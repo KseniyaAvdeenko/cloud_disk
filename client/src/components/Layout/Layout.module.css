@@ -1,5 +1,30 @@
-.layout {
+.d-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.grid, .layout {
+  display: -ms-grid;
   display: grid;
+}
+
+.commonButton {
+  padding: 1.5rem 2.5rem;
+  width: fit-content;
+  background-color: #1F3A5F;
+  border-radius: 1.5rem;
+  border: none;
+  outline: none;
+  color: #FFFFFF;
+  font-size: 1.8rem;
+  transition: all 0.5s ease;
+}
+.commonButton:hover, .commonButton:active {
+  background: #3D5A80;
+}
+
+.layout {
   grid-template-rows: 10rem calc(100vh - 10rem);
   background: #0F1C2E;
   width: 100%;
