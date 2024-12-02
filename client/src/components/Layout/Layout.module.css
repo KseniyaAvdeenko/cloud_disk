@@ -1,0 +1,9 @@
+.layout {
+  display: grid;
+  grid-template-rows: 10rem calc(100vh - 10rem);
+  background: #0F1C2E;
+  width: 100%;
+  height: 100%;
+}
+
+/*# sourceMappingURL=Layout.module.css.map */

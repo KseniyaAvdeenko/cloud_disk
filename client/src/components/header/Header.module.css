@@ -1,0 +1,13 @@
+.header {
+  width: 100%;
+  padding: 3rem 10%;
+  border-bottom: 0.1rem solid #acc2ef;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.header > div > button {
+  margin: 0 1rem;
+}
+
+/*# sourceMappingURL=Header.module.css.map */

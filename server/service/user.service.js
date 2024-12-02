@@ -9,8 +9,7 @@ class UserService {
         const candidate = await User.findOne({ email: email })
         if (candidate) {throw ApiError.BadRequestError(`User with email ${email} already exists`, [])}
         const hashedPassword = await bcrypt.hash(password, 6)
-        const user = await User.create({ email: email, password: hashedPassword })
-        return user;
+        await User.create({ email: email, password: hashedPassword })
     }
     async signIn(email, password){
         const user = await User.findOne({email: email});
@@ -20,21 +19,33 @@ class UserService {
         const userDto = new UserDto(user);
         const tokens = tokenService.generateTokens({...userDto})
         await tokenService.saveToken(userDto.id, tokens.refreshToken)
-        return {...tokens, user: userDto}
+        return {...tokens}
+    }
+    async signOut(refresh) {
+        await tokenService.deleteToken(refresh)
+    }
+
+    async refresh(refresh) {
+        if (!refresh) throw ApiError.UnauthorizedError()
+        const userData = tokenService.validateRefreshToken(refresh);
+        const tokenFromDb = await tokenService.getToken(refresh);
+        if (!userData || !tokenFromDb) throw ApiError.UnauthorizedError()
+        const user = await User.findById(userData.id)
+        const userDto = new UserDto(user)
+        const tokens = tokenService.generateTokens({...userDto})
+        await tokenService.saveToken(userDto.id, tokens.refreshToken)
+        return {...tokens}
+    }
+
+    async getCurrentUser(refresh) {
+        if (!refresh) throw ApiError.UnauthorizedError()
+        const userData = tokenService.validateRefreshToken(refresh);
+        const tokenFromDb = await tokenService.getToken(refresh);
+        if (!userData || !tokenFromDb) throw ApiError.UnauthorizedError()
+        const user = await User.findById(userData.id)
+        return new UserDto(user)
     }
 }
 
 module.exports = new UserService;
 
-// const user = await User.findOne({email: email});
-//         if (!user) {
-//             throw ApiError.BadRequestError(`User does not exist`, [])
-//         }
-//         const isPassEqual = await bcrypt.compare(password, user.password)
-        // if (!isPassEqual) {
-        //     throw ApiError.BadRequestError(`Incorrect password`, [])
-        // }
-//         const userDto = new UserDto(user)
-//         const tokens = tokenService.generateTokens({...userDto})
-//         await tokenService.saveToken(userDto.id, tokens.refreshToken)
-//         return {...tokens, user: userDto}
