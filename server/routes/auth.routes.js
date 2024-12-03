@@ -11,7 +11,7 @@ router.post('/sign_up',
 )
 router.post('/sign_in', userController.signIn)
 router.post('/sign_out', authMiddleware, userController.signOut);
-router.get('/refresh', authMiddleware, userController.refresh);
+router.get('/refresh', userController.refresh);
 
 
 

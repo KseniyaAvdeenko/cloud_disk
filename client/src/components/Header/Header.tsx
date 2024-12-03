@@ -1,26 +1,22 @@
-import React from 'react';
+import React, {FC} from 'react';
 import styles from './Header.module.sass'
 import {useAppSelector} from "../../hooks/useAppSelector";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {activateSignIn, activateSignUp} from "../../store/actions/formsAction";
-import {signOutUser} from "../../store/actions/authAction";
+import Logo from '../../assets/img/logo.png'
 
-const Header = () => {
+const Header: FC<{ imgHeight?: number }> = ({imgHeight = 40}) => {
     const {isAuth} = useAppSelector(state => state.authReducer);
-    const {currentUser} = useAppSelector(state => state.userReducer);
     const dispatch = useAppDispatch();
 
     return (
         <header className={styles.header}>
-            {isAuth
-                ? <div className={styles.header__auth}>
-                    <div>{currentUser && currentUser.email}</div>
-                    <button onClick={()=>dispatch(signOutUser())}>Sign Out</button>
-                </div>
-                : <div className={styles.header__auth}>
+            <img src={Logo} height={imgHeight} alt="logo"/>
+            {!isAuth &&
+                (<div className={styles.header__auth}>
                     <button onClick={() => dispatch(activateSignIn())}>Sign In</button>
                     <button onClick={() => dispatch(activateSignUp())}>Sign Up</button>
-                </div>
+                </div>)
             }
         </header>
     );

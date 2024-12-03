@@ -9,7 +9,7 @@
   display: grid;
 }
 
-.commonButton, .header__auth > button {
+.commonButton {
   padding: 1.5rem 2.5rem;
   width: fit-content;
   background-color: #1F3A5F;
@@ -20,14 +20,14 @@
   font-size: 1.8rem;
   transition: all 0.5s ease;
 }
-.commonButton:hover, .header__auth > button:hover, .commonButton:active, .header__auth > button:active {
+.commonButton:hover, .commonButton:active {
   background: #3D5A80;
 }
 
 .header {
   width: 100%;
-  padding: 3rem 10%;
-  border-bottom: 0.1rem solid #acc2ef;
+  padding: 1.5rem 5%;
+  background: #374357;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -ms-flex-direction: row;
@@ -35,9 +35,9 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  justify-content: end;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 .header__auth {
   -webkit-box-orient: horizontal;
@@ -54,6 +54,20 @@
 }
 .header__auth > button {
   margin: 0 1rem;
+  padding: 1rem 2.5rem;
+  width: fit-content;
+  background-color: transparent;
+  border-radius: 1.5rem;
+  border: 0.1rem solid #cee8ff;
+  outline: none;
+  color: #cee8ff;
+  font-size: 1.8rem;
+  transition: all 0.5s ease;
+}
+.header__auth > button:hover, .header__auth > button:active {
+  background: #1f2b3e;
+  border-color: #1f2b3e;
+  color: #FFFFFF;
 }
 
 /*# sourceMappingURL=Header.module.css.map */

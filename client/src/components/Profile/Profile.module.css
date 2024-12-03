@@ -1,0 +1,68 @@
+.d-flex, .signOut {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.grid, .currentUser, .sidebar, .profile {
+  display: -ms-grid;
+  display: grid;
+}
+
+.commonButton {
+  padding: 1.5rem 2.5rem;
+  width: fit-content;
+  background-color: #1F3A5F;
+  border-radius: 1.5rem;
+  border: none;
+  outline: none;
+  color: #FFFFFF;
+  font-size: 1.8rem;
+  transition: all 0.5s ease;
+}
+.commonButton:hover, .commonButton:active {
+  background: #3D5A80;
+}
+
+.profile {
+  padding: 3rem 5%;
+  grid-template-columns: 1fr 4fr;
+}
+
+.sidebar {
+  border-right: 0.1rem solid #374357;
+  grid-template-rows: 2fr 1fr 1fr;
+  row-gap: 1rem;
+}
+
+.signOut {
+  cursor: pointer;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: start;
+}
+.signOut > img {
+  margin-right: 1rem;
+}
+
+.currentUser {
+  grid-auto-rows: min-content;
+  row-gap: 1rem;
+}
+.currentUser > div {
+  justify-self: center;
+}
+.currentUser__avatar {
+  border-radius: 50%;
+  width: 7rem;
+  height: 7rem;
+}
+
+/*# sourceMappingURL=Profile.module.css.map */

@@ -2,7 +2,29 @@
 
 .layout
   @extend .grid
-  grid-template-rows: 10rem calc(100vh - 10rem)
+  grid-template-rows: min-content auto
   background: $bg100
   width: 100%
   height: 100%
+  position: relative
+
+
+.ntfs
+  position: absolute
+  bottom: 2rem
+  left: 2rem
+
+  &__error, &__success
+    padding: 1rem
+    margin: 1rem 0
+    color: inherit
+    border-radius: 1rem
+    width: 15rem
+    height: fit-content
+    font-size: inherit
+    transition: display .5s ease
+
+  &__error
+    background: rgba(255, 148, 148, 0.2)
+  &__success
+    background: rgba(206, 232, 255, 0.2)
