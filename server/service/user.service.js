@@ -1,15 +1,19 @@
 const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const ApiError = require('../exceptions/apiError');
-const tokenService = require('./token.service')
-const UserDto = require('../dto/user.dto')
+const tokenService = require('./token.service');
+const UserDto = require('../dto/user.dto');
+const fileService = require('./file.service');
+const File = require('../models/file.model');
 
 class UserService {
     async signUp(email, password) {
-        const candidate = await User.findOne({ email: email })
+        const candidate = await User.findOne({ email: email });
         if (candidate) {throw ApiError.BadRequestError(`User with email ${email} already exists`, [])}
-        const hashedPassword = await bcrypt.hash(password, 6)
-        await User.create({ email: email, password: hashedPassword })
+        const hashedPassword = await bcrypt.hash(password, 6);
+        const newUser = await User({ email: email, password: hashedPassword });
+        newUser.save()
+        await fileService.createDir(new File({userId: newUser._id, name: ''}))
     }
     async signIn(email, password){
         const user = await User.findOne({email: email});
@@ -48,5 +52,5 @@ class UserService {
     }
 }
 
-module.exports = new UserService;
+module.exports = new UserService();
 

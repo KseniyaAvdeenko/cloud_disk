@@ -8,7 +8,7 @@ const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes')
 const cookieParser = require('cookie-parser');
 const errorMiddleware = require('./middlewares/error.middleware')
-
+const fileRouter = require('./routes/file.routes')
 
 //middlewares
 app.use(cors({origin: [process.env.CLIENT_URL], credentials: true}));
@@ -17,7 +17,8 @@ app.use(cookieParser())
 
 
 app.use('/api/auth', authRoutes)
-app.use('/api/', userRoutes)
+app.use('/api/users', userRoutes)
+app.use('/api/files', fileRouter)
 
 app.use(errorMiddleware)
 

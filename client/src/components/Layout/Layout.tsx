@@ -7,8 +7,8 @@ interface ILayoutProps{
 }
 const Layout: FC<ILayoutProps> = ({children}) => {
     const {error, success} = useAppSelector(state => state.ntfReducer);
-    const [errors, setErrors] = useState<string[]>(['err']);
-    const [successMes, setSuccessMes] = useState<string[]>(['success']);
+    const [errors, setErrors] = useState<string[]>([]);
+    const [successMes, setSuccessMes] = useState<string[]>([]);
 
     useEffect(()=>{
         if(error) setErrors([...errors, error])
