@@ -6,10 +6,10 @@ import {getCurrentUser} from "./store/actions/userAction";
 import AuthForms from "./components/AuthForms/AuthForms";
 import Layout from "./components/Layout/Layout";
 import Profile from "./components/Profile/Profile";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
     const {accessToken, isAuth} = useAppSelector(state => state.authReducer);
-
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -19,13 +19,21 @@ function App() {
         }
     }, [accessToken])
 
-    return  (
-        <Layout >
-            {!isAuth
-                ? <AuthForms/>
-                : <Profile/>
-            }
-        </Layout>
+    return (
+        <BrowserRouter>
+            <Layout>
+
+                {!isAuth
+                    ? <Routes>
+                        <Route path={'/'} element={<AuthForms/>}/>
+                    </Routes>
+                    : <Routes>
+                        <Route path={'/'} element={<Profile/>}/>
+                    </Routes>
+                }
+            </Layout>
+        </BrowserRouter>
+
     );
 }
 

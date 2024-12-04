@@ -1,0 +1,58 @@
+@import "../../../App.module"
+
+.main
+  @include flex(column, start, start)
+  width: 100%
+  padding: 2rem
+
+  &__buttons
+    margin-bottom: 2rem
+
+    &__button
+      @extend .commonButton
+      padding: 1rem 2rem
+      margin: 1rem
+
+
+.fileListTable
+  @extend .grid
+  width: 100%
+  grid-auto-rows: min-content
+
+  &__row, &__rowHead
+    @extend .grid
+    grid-template-columns: .5fr 4fr repeat(4, 1fr)
+    border-bottom: .1rem solid $bg300
+    gap: 1rem
+    padding: .5rem 0
+
+  &__row
+    transition: all .5s ease
+    cursor: pointer
+
+  &__row:hover
+    transform: scale(1.02)
+
+  &__rowHead
+    border-bottom: .2rem solid $bg300
+
+  &__fileIcon, &__name, &__date, &__size
+    @extend .cell
+
+  &__name
+    justify-self: start !important
+
+  &__fileIcon
+    cursor: pointer
+
+  &__fileIcon > svg > path
+    fill: $bg200
+    transition: all .5s ease
+
+  &__fileIcon:hover > svg > path
+    fill: $primary300
+
+
+.cell
+  padding: .5rem 1rem
+  justify-self: center

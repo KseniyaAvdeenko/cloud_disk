@@ -1,0 +1,88 @@
+.d-flex, .main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.grid, .fileListTable__row, .fileListTable__rowHead, .fileListTable {
+  display: -ms-grid;
+  display: grid;
+}
+
+.commonButton, .main__buttons__button {
+  padding: 1.5rem 2.5rem;
+  width: fit-content;
+  background-color: #1F3A5F;
+  border-radius: 1.5rem;
+  border: none;
+  outline: none;
+  color: #FFFFFF;
+  font-size: 1.8rem;
+  transition: all 0.5s ease;
+}
+.commonButton:hover, .main__buttons__button:hover, .commonButton:active, .main__buttons__button:active {
+  background: #3D5A80;
+}
+
+.main {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: start;
+  width: 100%;
+  padding: 2rem;
+}
+.main__buttons {
+  margin-bottom: 2rem;
+}
+.main__buttons__button {
+  padding: 1rem 2rem;
+  margin: 1rem;
+}
+
+.fileListTable {
+  width: 100%;
+  grid-auto-rows: min-content;
+}
+.fileListTable__row, .fileListTable__rowHead {
+  grid-template-columns: 0.5fr 4fr repeat(4, 1fr);
+  border-bottom: 0.1rem solid #374357;
+  gap: 1rem;
+  padding: 0.5rem 0;
+}
+.fileListTable__row {
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+.fileListTable__row:hover {
+  transform: scale(1.02);
+}
+.fileListTable__rowHead {
+  border-bottom: 0.2rem solid #374357;
+}
+.fileListTable__name {
+  justify-self: start !important;
+}
+.fileListTable__fileIcon {
+  cursor: pointer;
+}
+.fileListTable__fileIcon > svg > path {
+  fill: #1f2b3e;
+  transition: all 0.5s ease;
+}
+.fileListTable__fileIcon:hover > svg > path {
+  fill: #acc2ef;
+}
+
+.cell, .fileListTable__fileIcon, .fileListTable__name, .fileListTable__date, .fileListTable__size {
+  padding: 0.5rem 1rem;
+  justify-self: center;
+}
+
+/*# sourceMappingURL=Disk.module.css.map */

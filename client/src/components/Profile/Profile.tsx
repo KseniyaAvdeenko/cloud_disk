@@ -3,6 +3,7 @@ import {useAppSelector} from "../../hooks/useAppSelector";
 import styles from './Profile.module.sass'
 import Header from "../Header/Header";
 import Sidebar from "./Sidebar";
+import Disk from "./Disk/Disk";
 
 const Profile = () => {
     const {currentUser} = useAppSelector(state => state.userReducer);
@@ -11,7 +12,7 @@ const Profile = () => {
             <Header imgHeight={20}/>
             <div className={styles.profile}>
                 <Sidebar currentUser={currentUser}/>
-                <main></main>
+                <Disk/>
             </div>
         </Fragment>
 
