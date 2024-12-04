@@ -3,9 +3,9 @@ import {useAppSelector} from "./hooks/useAppSelector";
 import {useAppDispatch} from "./hooks/useAppDispatch";
 import {checkAuth} from "./store/actions/authAction";
 import {getCurrentUser} from "./store/actions/userAction";
-import AuthForms from "./components/AuthForms/AuthForms";
-import Layout from "./components/Layout/Layout";
-import Profile from "./components/Profile/Profile";
+import AuthForms from "./components/AuthForms/AuthForms.component";
+import Layout from "./components/Layout/Layout.component";
+import Profile from "./components/Profile/Profile.component";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
@@ -22,7 +22,6 @@ function App() {
     return (
         <BrowserRouter>
             <Layout>
-
                 {!isAuth
                     ? <Routes>
                         <Route path={'/'} element={<AuthForms/>}/>

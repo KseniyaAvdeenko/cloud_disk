@@ -4,13 +4,13 @@ import {IFile} from "../../interface/IFile";
 
 
 const initialState: IFilesInitial = {
-    files: null,
+    files: [],
     file: null,
     currentDir: null,
     isLoading: false,
-    parentChildren: null
+    dirStack: []
 }
-export const fileSlice = createSlice({
+export const fileReducer = createSlice({
     name: 'files',
     initialState,
     reducers: {
@@ -24,15 +24,23 @@ export const fileSlice = createSlice({
         loadFilesFail(state) {
             state.isLoading = false;
         },
-        fetchParentFiles(state) {
-            state.isLoading = true;
+        setDirName(state, action: PayloadAction<string|null>) {
+            if(action.payload){
+                state.currentDir = action.payload;
+                state.dirStack.push(action.payload)
+            }else{
+                state.currentDir = null;
+                state.dirStack = [];
+            }
         },
-        loadParentFilesSuccess(state, action: PayloadAction<IFile[]>) {
-            state.isLoading = false;
-            state.parentChildren = action.payload
-        },
-        loadParentFilesFail(state) {
-            state.isLoading = false;
+        goBack(state, action: PayloadAction<string|null>){
+            if(action.payload){
+                state.currentDir = action.payload;
+                state.dirStack.pop()
+            }else{
+                state.currentDir = null;
+                state.dirStack = [];
+            }
         },
         fetchFile(state) {
             state.isLoading = true;
@@ -45,7 +53,7 @@ export const fileSlice = createSlice({
             state.isLoading = false;
         },
         createFileSuccess(state, action: PayloadAction<IFile>) {
-            state.file = action.payload
+            state.file = action.payload;
         },
         deleteFileSuccess(state) {
             state.file = null
@@ -53,4 +61,4 @@ export const fileSlice = createSlice({
     }
 })
 
-export default fileSlice.reducer;
+export default fileReducer.reducer;

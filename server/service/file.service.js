@@ -10,12 +10,12 @@ class FilesService {
             try {
                 if (!fs.existsSync(filePath)) {
                     fs.mkdirSync(filePath)
-                    return resolve({message: 'File was created'})
+                    return resolve({message: 'FileComponent was created'})
                 } else {
-                    return reject({message: "File already exists"})
+                    return reject({message: "FileComponent already exists"})
                 }
             } catch (e) {
-                return reject({message: "File error"})
+                return reject({message: "FileComponent error"})
             }
         }))
     }

@@ -6,7 +6,7 @@ import Form from "../../UI/Form";
 import InputContainer from "../../UI/InputContainer";
 import {signInUser, signUpUser} from "../../store/actions/authAction";
 import {activateSignIn} from "../../store/actions/formsAction";
-import Header from "../Header/Header";
+import Header from "../Header/Header.component";
 
 const AuthForms = () => {
     const {signInFormDisplay, signUpFormDisplay} = useAppSelector(state => state.authFormsReducer);

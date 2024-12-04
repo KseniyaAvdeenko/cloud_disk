@@ -26,33 +26,45 @@
     gap: 1rem
     padding: .5rem 0
 
+  &__rowHead
+    border-bottom: .2rem solid $bg300
+
   &__row
     transition: all .5s ease
     cursor: pointer
 
   &__row:hover
-    transform: scale(1.02)
+    @include transform(scale(1.02))
 
-  &__rowHead
-    border-bottom: .2rem solid $bg300
 
-  &__fileIcon, &__name, &__date, &__size
-    @extend .cell
+    &__fileIcon, &__name, &__date, &__size
+      @extend .cell
 
-  &__name
-    justify-self: start !important
+    &__name
+      justify-self: start !important
 
-  &__fileIcon
-    cursor: pointer
+    &__fileIcon
+      cursor: pointer
 
-  &__fileIcon > svg > path
-    fill: $bg200
-    transition: all .5s ease
+    &__fileIcon > svg > path
+      fill: $bg200
+      @include transition(all)
 
-  &__fileIcon:hover > svg > path
+  &__row:hover > &__fileIcon > svg > path
     fill: $primary300
-
 
 .cell
   padding: .5rem 1rem
   justify-self: center
+
+.form
+  @include flex(column, center, center)
+  & > h1
+    font-size: 2rem
+    margin-bottom: 3.1rem
+  &__container
+    width: 100%
+    @include flex(column, center, center)
+
+.inputContainer
+  @extend .inputContainerCommon

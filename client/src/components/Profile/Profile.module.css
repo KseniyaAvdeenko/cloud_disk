@@ -1,7 +1,7 @@
-.d-flex, .signOut {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+.d-flex, .signOut, .inputContainerCommon {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
 }
 
 .grid, .currentUser, .sidebar, .profile {
@@ -18,14 +18,54 @@
   outline: none;
   color: #FFFFFF;
   font-size: 1.8rem;
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
 .commonButton:hover, .commonButton:active {
   background: #3D5A80;
 }
 
+.inputContainerCommon {
+  width: 100%;
+  margin-bottom: 2rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.inputContainerCommon > label {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+.inputContainerCommon > input {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  color: #0F1C2E;
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.inputContainerCommon > input:focus {
+  border: none;
+  outline: none;
+}
+.inputContainerCommon > input::placeholder {
+  color: #374357;
+}
+
 .profile {
   padding: 3rem 5%;
+  position: relative;
   grid-template-columns: 1fr 4fr;
 }
 

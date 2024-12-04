@@ -1,7 +1,7 @@
-.d-flex, .authInputContainer, .authForm__inner, .authForm__outer, .authForms {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+.d-flex, .authForm__inner, .authForm__outer, .authForms, .inputContainerCommon, .authInputContainer {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
 }
 
 .grid {
@@ -18,10 +18,49 @@
   outline: none;
   color: #FFFFFF;
   font-size: 1.8rem;
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
 .commonButton:hover, .authForm__inner > button:hover, .commonButton:active, .authForm__inner > button:active {
   background: #3D5A80;
+}
+
+.inputContainerCommon, .authInputContainer {
+  width: 100%;
+  margin-bottom: 2rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.inputContainerCommon > label, .authInputContainer > label {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+.inputContainerCommon > input, .authInputContainer > input {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  color: #0F1C2E;
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.inputContainerCommon > input:focus, .authInputContainer > input:focus {
+  border: none;
+  outline: none;
+}
+.inputContainerCommon > input::placeholder, .authInputContainer > input::placeholder {
+  color: #374357;
 }
 
 .authForms {
@@ -75,40 +114,6 @@
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-}
-.authInputContainer {
-  width: 100%;
-  margin-bottom: 2rem;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
-  align-items: start;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-.authInputContainer > label {
-  margin-bottom: 1rem;
-  font-size: 1.8rem;
-}
-.authInputContainer > input {
-  width: 100%;
-  padding: 1rem;
-  border-radius: 1rem;
-  border: none;
-  outline: none;
-  color: #0F1C2E;
-  transition: all 0.5s ease;
-}
-.authInputContainer > input:focus {
-  border: none;
-  outline: none;
-}
-.authInputContainer > input::placeholder {
-  color: #374357;
 }
 
 /*# sourceMappingURL=AuthForms.module.css.map */

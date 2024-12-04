@@ -27,25 +27,4 @@
       @extend .commonButton
 
 .authInputContainer
-  width: 100%
-  margin-bottom: 2rem
-  @include flex(column, center, start)
-
-  & > label
-    margin-bottom: 1rem
-    font-size: 1.8rem
-
-  & > input
-    width: 100%
-    padding: 1rem
-    border-radius: 1rem
-    border: none
-    outline: none
-    color: $bg100
-    transition: all .5s ease
-
-    &:focus
-      border: none
-      outline: none
-    &::placeholder
-      color: $bg300
+  @extend .inputContainerCommon

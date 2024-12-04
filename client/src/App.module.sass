@@ -12,11 +12,25 @@ $accent200: #cee8ff
 $text100: #FFFFFF
 $text200: #e0e0e0
 
+@mixin blur($value)
+  -webkit-backdrop-filter: blur($value)
+  backdrop-filter: blur($value)
+
+@mixin transition($prop)
+  -webkit-transition: $prop .5s ease
+  -o-transition: $prop .5s ease
+  transition: $prop .5s ease
+
+
+@mixin transform($func)
+  -webkit-transform: $func
+  -ms-transform: $func
+  transform: $func
 
 .d-flex
-  display: -webkit-box
-  display: -ms-flexbox
-  display: flex
+  display: -webkit-box!important
+  display: -ms-flexbox!important
+  display: flex!important
 
 
 @mixin flex-dir($dir)
@@ -35,17 +49,19 @@ $text200: #e0e0e0
   @else if $value == space-around
       -ms-flex-pack: distribute
   @else
-    -webkit-box-pack:  $value
+    -webkit-box-pack: $value
     -ms-flex-pack:  $value
   justify-content:  $value
 
+@mixin flex-ai($value)
+  -webkit-box-align: $value
+  -ms-flex-align: $value
+  align-items: $value
 
 @mixin flex($direction, $jc, $ai)
   @extend .d-flex
   @include flex-dir($direction)
-  -webkit-box-align: $ai
-  -ms-flex-align: $ai
-  align-items: $ai
+  @include flex-ai($ai)
   @include flex-jc($jc)
 
 .grid
@@ -62,9 +78,32 @@ $text200: #e0e0e0
   outline: none
   color: $text100
   font-size: 1.8rem
-  transition: all .5s ease
+  @include transition(all)
 
   &:hover, &:active
     background: $accent100
 
 
+.inputContainerCommon
+  width: 100%
+  margin-bottom: 2rem
+  @include flex(column, center, start)
+
+  & > label
+    margin-bottom: 1rem
+    font-size: 1.8rem
+
+  & > input
+    width: 100%
+    padding: 1rem
+    border-radius: 1rem
+    border: none
+    outline: none
+    color: $bg100
+    @include transition(all)
+
+    &:focus
+      border: none
+      outline: none
+    &::placeholder
+      color: $bg300

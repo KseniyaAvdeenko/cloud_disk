@@ -1,14 +1,15 @@
 import React, {FC} from 'react';
 import {IFile} from "../../../interface/IFile";
 import styles from "./Disk.module.sass";
-import File from "./File";
+import File from "./File.component";
 
 
 interface IFileListProps {
-    files: IFile[] | [] | null
+    files: IFile[] | [] | null;
+    setBackBtn: Function
 }
 
-const FileList: FC<IFileListProps> = ({files}) => {
+const FileList: FC<IFileListProps> = ({files, setBackBtn}) => {
     return (
         <div className={styles.fileListTable}>
             <div className={styles.fileListTable__rowHead}>
@@ -19,7 +20,7 @@ const FileList: FC<IFileListProps> = ({files}) => {
                 <div className={styles.fileListTable__date}>Date</div>
                 <div className={styles.fileListTable__size}>Size</div>
             </div>
-            {files && files.map(file => (<File file={file} key={file._id}/>))}
+            {files && files.map(file => (<File file={file} key={file._id} setBackBtn={setBackBtn}/>))}
         </div>
     );
 };

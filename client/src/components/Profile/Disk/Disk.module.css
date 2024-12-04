@@ -1,7 +1,7 @@
-.d-flex, .main {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+.d-flex, .form__container, .form, .main, .inputContainerCommon, .inputContainer {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
 }
 
 .grid, .fileListTable__row, .fileListTable__rowHead, .fileListTable {
@@ -18,10 +18,49 @@
   outline: none;
   color: #FFFFFF;
   font-size: 1.8rem;
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
 .commonButton:hover, .main__buttons__button:hover, .commonButton:active, .main__buttons__button:active {
   background: #3D5A80;
+}
+
+.inputContainerCommon, .inputContainer {
+  width: 100%;
+  margin-bottom: 2rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.inputContainerCommon > label, .inputContainer > label {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+.inputContainerCommon > input, .inputContainer > input {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  color: #0F1C2E;
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.inputContainerCommon > input:focus, .inputContainer > input:focus {
+  border: none;
+  outline: none;
+}
+.inputContainerCommon > input::placeholder, .inputContainer > input::placeholder {
+  color: #374357;
 }
 
 .main {
@@ -56,33 +95,67 @@
   gap: 1rem;
   padding: 0.5rem 0;
 }
+.fileListTable__rowHead {
+  border-bottom: 0.2rem solid #374357;
+}
 .fileListTable__row {
   transition: all 0.5s ease;
   cursor: pointer;
 }
 .fileListTable__row:hover {
+  -webkit-transform: scale(1.02);
+  -ms-transform: scale(1.02);
   transform: scale(1.02);
 }
-.fileListTable__rowHead {
-  border-bottom: 0.2rem solid #374357;
-}
-.fileListTable__name {
+.fileListTable__row:hover__name {
   justify-self: start !important;
 }
-.fileListTable__fileIcon {
+.fileListTable__row:hover__fileIcon {
   cursor: pointer;
 }
-.fileListTable__fileIcon > svg > path {
+.fileListTable__row:hover__fileIcon > svg > path {
   fill: #1f2b3e;
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
-.fileListTable__fileIcon:hover > svg > path {
+.fileListTable__row:hover > .fileListTable__fileIcon > svg > path {
   fill: #acc2ef;
 }
 
-.cell, .fileListTable__fileIcon, .fileListTable__name, .fileListTable__date, .fileListTable__size {
+.cell, .fileListTable__row:hover__fileIcon, .fileListTable__row:hover__name, .fileListTable__row:hover__date, .fileListTable__row:hover__size {
   padding: 0.5rem 1rem;
   justify-self: center;
+}
+
+.form {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.form > h1 {
+  font-size: 2rem;
+  margin-bottom: 3.1rem;
+}
+.form__container {
+  width: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 /*# sourceMappingURL=Disk.module.css.map */

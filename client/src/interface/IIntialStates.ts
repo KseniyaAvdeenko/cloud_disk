@@ -22,9 +22,9 @@ export interface IAuthFormsInitial {
 }
 
 export interface IFilesInitial {
-    files: IFile[] | [] | null;
+    files: IFile[] | [];
     currentDir: string|null
-    parentChildren: IFile[] | [] | null
+    dirStack: string[]
     file: IFile | null
     isLoading: boolean;
 }
