@@ -7,14 +7,15 @@ const app = express();
 const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes')
 const cookieParser = require('cookie-parser');
-const errorMiddleware = require('./middlewares/error.middleware')
-const fileRouter = require('./routes/file.routes')
+const errorMiddleware = require('./middlewares/error.middleware');
+const fileRouter = require('./routes/file.routes');
+const fileUpload = require('express-fileupload')
 
 //middlewares
 app.use(cors({origin: [process.env.CLIENT_URL], credentials: true}));
 app.use(express.json());
 app.use(cookieParser())
-
+app.use(fileUpload({}))
 
 app.use('/api/auth', authRoutes)
 app.use('/api/users', userRoutes)
