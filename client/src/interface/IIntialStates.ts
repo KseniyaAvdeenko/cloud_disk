@@ -15,7 +15,7 @@ export interface IUserInitialState {
     currentUser: IUser | null
 }
 
-export interface IAuthFormsInitial {
+export interface IAuthForm {
     activeForm: 'signIn' | 'signUp';
     signInFormDisplay: 'flex' | 'none'
     signUpFormDisplay: 'flex' | 'none'

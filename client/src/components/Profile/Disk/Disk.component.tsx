@@ -1,18 +1,9 @@
-import React, {FC, Fragment, useEffect, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {useAppSelector} from "../../../hooks/useAppSelector";
 import {useAppDispatch} from "../../../hooks/useAppDispatch";
-import {
-    createFile,
-    getUserFiles,
-    returnToPrevDir,
-    setDirectoryName,
-    uploadFile
-} from "../../../store/actions/fileAction";
+import {createFile, getUserFiles, returnToPrevDir, uploadFile} from "../../../store/actions/fileAction";
 import FileList from "./FileList.component";
 import styles from './Disk.module.sass'
-import Popup from "../../Popup/Popup.component";
-import InputContainer from "../../../UI/InputContainer";
-import Form from "../../../UI/Form";
 import CreateDir from "./CreateDir.component";
 import UploadFile from "./UploadFile.component";
 

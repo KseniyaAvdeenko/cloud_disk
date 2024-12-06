@@ -1,15 +1,19 @@
-import React, {ChangeEvent, FormEvent, Fragment, useState} from 'react';
+import React, {ChangeEvent, FC, FormEvent, Fragment, useState} from 'react';
 import styles from './AuthForms.module.sass'
-import {useAppSelector} from "../../hooks/useAppSelector";
+
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import Form from "../../UI/Form";
 import InputContainer from "../../UI/InputContainer";
 import {signInUser, signUpUser} from "../../store/actions/authAction";
-import {activateSignIn} from "../../store/actions/formsAction";
-import Header from "../Header/Header.component";
+import {IAuthForm} from "../../interface/IIntialStates";
 
-const AuthForms = () => {
-    const {signInFormDisplay, signUpFormDisplay} = useAppSelector(state => state.authFormsReducer);
+interface IAuthFormsProps {
+    authForm: IAuthForm;
+    activateSignInForm: Function
+    activateSignUpForm: Function
+}
+
+const AuthForms: FC<IAuthFormsProps> = ({authForm, activateSignUpForm, activateSignInForm }) => {
     const dispatch = useAppDispatch()
     const [sUpUser, setSignUpUser] = useState<{ email: string, password: string }>({email: '', password: ''})
     const [sInUser, setSignInUser] = useState<{ email: string, password: string }>({email: '', password: ''})
@@ -24,7 +28,7 @@ const AuthForms = () => {
         e.preventDefault()
         console.log(JSON.stringify(sUpUser))
         dispatch(signUpUser(sUpUser.email, sUpUser.password))
-        dispatch(activateSignIn())
+        activateSignInForm()
         setSignUpUser({email: '', password: ''})
     }
 
@@ -39,12 +43,11 @@ const AuthForms = () => {
 
     return (
         <Fragment>
-            <Header/>
             <main className={styles.authForms}>
                 <Form
                     formContainerClass={styles.authForm__outer}
                     formClassname={styles.authForm__inner}
-                    formDisplay={signInFormDisplay}
+                    formDisplay={authForm.signInFormDisplay}
                     onSubmitHandler={onSubmitSignIn}
                     formHeading={'Sign In'}
                     button={{btnText: 'Sign in', classname: ""}}>
@@ -63,7 +66,7 @@ const AuthForms = () => {
                 <Form
                     formContainerClass={styles.authForm__outer}
                     formClassname={styles.authForm__inner}
-                    formDisplay={signUpFormDisplay}
+                    formDisplay={authForm.signUpFormDisplay}
                     onSubmitHandler={onSubmitSignUp}
                     formHeading={'Sign Up'}
                     button={{btnText: 'Sign up', classname: ""}}>

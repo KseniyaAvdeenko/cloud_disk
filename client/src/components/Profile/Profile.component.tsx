@@ -11,7 +11,6 @@ const ProfileComponent = () => {
 
     return (
         <Fragment>
-            <Header imgHeight={20}/>
             <div className={styles.profile}>
                 <Sidebar currentUser={currentUser}/>
                 <Disk/>
