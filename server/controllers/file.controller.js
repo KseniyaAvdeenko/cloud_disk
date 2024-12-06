@@ -39,6 +39,17 @@ class FileController {
         } catch (e) {
             next(e)
         }
+    }
+
+    async downLoadFile(req, res, next) {
+        try{
+            const {refreshToken} = req.cookies;
+            if (!refreshToken) return next(ApiError.UnauthorizedError())
+            const file = await fileService.downloadFile(refreshToken, req.params.id)
+            res.download(file.path, file.file.name)
+        }catch (e) {
+            next(e)
+        }
 
     }
 }
