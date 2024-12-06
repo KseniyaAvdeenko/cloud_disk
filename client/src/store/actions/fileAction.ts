@@ -55,8 +55,7 @@ export const uploadFile = (dirId: string | null, file: any) => async (dispatch: 
                         console.log(`Upload progress: ${progress}%`);
                     }
                 }
-            }
-            );
+            });
         dispatch(fileReducer.actions.createFileSuccess(resp.data))
         dispatch(ntfReducer.actions.setSuccess('file created successfully'))
         dispatch(getUserFiles(dirId))
@@ -79,5 +78,19 @@ export const downLoadFile = (file: IFile) => async (dispatch: AppDispatch) =>{
         }
     }catch (e) {
         dispatch(ntfReducer.actions.setError('create file fail'))
+    }
+}
+
+export const deleteFile = (fileId: string, dirId: string|null) => async (dispatch: AppDispatch) => {
+    try {
+        const resp = await axiosInstance.delete<{message: string}>(`/files/?id=${fileId}`);
+        dispatch(fileReducer.actions.deleteFileSuccess())
+        resp.data.message
+            ? dispatch(ntfReducer.actions.setSuccess(resp.data.message))
+            : dispatch(ntfReducer.actions.setSuccess('File deleted successfully'))
+        dispatch(getUserFiles(dirId))
+    } catch (e) {
+        console.log(e)
+        dispatch(ntfReducer.actions.setError('delete file fail'))
     }
 }

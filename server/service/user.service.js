@@ -3,21 +3,25 @@ const bcrypt = require('bcrypt');
 const ApiError = require('../exceptions/apiError');
 const tokenService = require('./token.service');
 const UserDto = require('../dto/user.dto');
-const fileService = require('./file.service');
-const File = require('../models/file.model');
 
 class UserService {
+
+    async getAuthorizedUser(refresh) {
+        const userData = tokenService.validateRefreshToken(refresh);
+        if (!userData) return ApiError.UnauthorizedError();
+        return User.findById(userData.id);
+    }
+
     async signUp(email, password) {
         const candidate = await User.findOne({ email: email });
         if (candidate) {throw ApiError.BadRequestError(`User with email ${email} already exists`, [])}
         const hashedPassword = await bcrypt.hash(password, 6);
         const newUser = await User({ email: email, password: hashedPassword });
         newUser.save()
-        await fileService.createDir(new File({userId: newUser._id, name: ''}))
+        return newUser
     }
     async signIn(email, password){
         const user = await User.findOne({email: email});
-        console.log(user)
         if(!user){ throw ApiError.BadRequestError(`User does not exist`, [])}
         const isPassEqual = bcrypt.compare(password, user.password)
         if (!isPassEqual) {throw ApiError.BadRequestError(`Incorrect password`, [])}
@@ -31,24 +35,20 @@ class UserService {
     }
 
     async refresh(refresh) {
-        if (!refresh) throw ApiError.UnauthorizedError()
-        const userData = tokenService.validateRefreshToken(refresh);
+        const currentUser = await this.getAuthorizedUser(refresh);
         const tokenFromDb = await tokenService.getToken(refresh);
-        if (!userData || !tokenFromDb) throw ApiError.UnauthorizedError()
-        const user = await User.findById(userData.id)
-        const userDto = new UserDto(user)
+        if (!currentUser || !tokenFromDb) throw ApiError.UnauthorizedError()
+        const userDto = new UserDto(currentUser)
         const tokens = tokenService.generateTokens({...userDto})
         await tokenService.saveToken(userDto.id, tokens.refreshToken)
         return {...tokens}
     }
 
     async getCurrentUser(refresh) {
-        if (!refresh) throw ApiError.UnauthorizedError()
-        const userData = tokenService.validateRefreshToken(refresh);
+        const currentUser = await this.getAuthorizedUser(refresh);
         const tokenFromDb = await tokenService.getToken(refresh);
-        if (!userData || !tokenFromDb) throw ApiError.UnauthorizedError()
-        const user = await User.findById(userData.id)
-        return new UserDto(user)
+        if (!currentUser || !tokenFromDb) throw ApiError.UnauthorizedError()
+        return new UserDto(currentUser)
     }
 }
 

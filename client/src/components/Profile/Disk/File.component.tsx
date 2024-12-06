@@ -2,9 +2,11 @@ import React, {FC} from 'react';
 import {IFile} from "../../../interface/IFile";
 import styles from "./Disk.module.sass";
 import {useAppDispatch} from "../../../hooks/useAppDispatch";
-import {downLoadFile, setDirectoryName} from "../../../store/actions/fileAction";
+import {deleteFile, downLoadFile, setDirectoryName} from "../../../store/actions/fileAction";
+import {useAppSelector} from "../../../hooks/useAppSelector";
 
 const File: FC<{ file: IFile; setBackBtn: Function }> = ({file, setBackBtn}) => {
+    const {currentDir} = useAppSelector(state => state.fileReducer)
     const dispatch = useAppDispatch();
 
 
@@ -19,6 +21,9 @@ const File: FC<{ file: IFile; setBackBtn: Function }> = ({file, setBackBtn}) => 
         e.stopPropagation();
         await downLoadFile(file);
     }
+
+    const deleteFileHandler = () => dispatch(deleteFile(file._id, currentDir))
+
 
     return (
         <div className={styles.row} onClick={() => openDirHandler(file)}>
@@ -55,7 +60,7 @@ const File: FC<{ file: IFile; setBackBtn: Function }> = ({file, setBackBtn}) => 
             {file.type !== "dir" &&(
                 <div className={styles.row__size}>{file.size}</div>
             )}
-            <div className={styles.row__delete}>
+            <div className={styles.row__delete} onClick={deleteFileHandler}>
                 <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M1 16C1 17.1 1.9 18 3 18H11C12.1 18 13 17.1 13 16V4H1V16ZM14 1H10.5L9.5 0H4.5L3.5 1H0V3H14V1Z"

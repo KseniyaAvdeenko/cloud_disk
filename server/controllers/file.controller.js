@@ -52,6 +52,16 @@ class FileController {
         }
 
     }
+    async deleteFile(req, res, next){
+        try{
+            const {refreshToken} = req.cookies;
+            if (!refreshToken) return next(ApiError.UnauthorizedError())
+            await fileService.deleteFile(refreshToken, req.query.id);
+            return res.status(204).json({message: 'File/Folder is deleted successfully'})
+        }catch (e) {
+            next(e)
+        }
+    }
 }
 
 

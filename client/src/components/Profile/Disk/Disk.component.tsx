@@ -111,7 +111,7 @@ const Disk = () => {
             />
             <main className={styles.main}>
                 <div className={styles.main__buttons}>
-                    <button style={{display: backBtn ? 'inline-block' : 'none'}}
+                    <button style={{visibility: backBtn ? 'visible' : 'hidden'}}
                             onClick={backClickHolder}
                             className={styles.main__buttons__button}>
                         Back
