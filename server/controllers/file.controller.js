@@ -45,7 +45,7 @@ class FileController {
         try{
             const {refreshToken} = req.cookies;
             if (!refreshToken) return next(ApiError.UnauthorizedError())
-            const file = await fileService.downloadFile(refreshToken, req.params.id)
+            const file = await fileService.downloadFile(refreshToken, req.query.id)
             res.download(file.path, file.file.name)
         }catch (e) {
             next(e)

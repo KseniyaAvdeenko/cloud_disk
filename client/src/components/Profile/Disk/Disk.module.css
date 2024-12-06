@@ -4,7 +4,7 @@
   display: flex !important;
 }
 
-.grid, .fileListTable__row, .fileListTable__rowHead, .fileListTable {
+.grid, .row, .rowHead, .fileListTable {
   display: -ms-grid;
   display: grid;
 }
@@ -89,41 +89,66 @@
   width: 100%;
   grid-auto-rows: min-content;
 }
-.fileListTable__row, .fileListTable__rowHead {
-  grid-template-columns: 0.5fr 4fr repeat(4, 1fr);
+
+.row, .rowHead {
+  grid-template-columns: 0.5fr 3.5fr repeat(3, 1fr) 0.5fr;
   border-bottom: 0.1rem solid #374357;
   gap: 1rem;
   padding: 0.5rem 0;
 }
-.fileListTable__rowHead {
+
+.rowHead {
   border-bottom: 0.2rem solid #374357;
 }
-.fileListTable__row {
+
+.row {
   transition: all 0.5s ease;
   cursor: pointer;
 }
-.fileListTable__row:hover {
+.row:hover {
   -webkit-transform: scale(1.02);
   -ms-transform: scale(1.02);
   transform: scale(1.02);
 }
-.fileListTable__row:hover__name {
-  justify-self: start !important;
+.row__date {
+  grid-column-start: 4;
 }
-.fileListTable__row:hover__fileIcon {
+.row__name {
+  justify-self: start !important;
+  grid-column-start: 2;
+}
+.row__fileIcon {
+  grid-column-start: 1;
+}
+.row__size {
+  grid-column-start: 5;
+}
+.row__download, .row__delete, .row__fileIcon {
   cursor: pointer;
 }
-.fileListTable__row:hover__fileIcon > svg > path {
+.row__fileIcon > svg > path {
   fill: #1f2b3e;
   -webkit-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
-.fileListTable__row:hover > .fileListTable__fileIcon > svg > path {
+.row__download {
+  grid-column-start: 3;
+}
+.row__download > svg:hover > path {
+  stroke: #acc2ef;
+}
+.row__delete {
+  grid-column-start: 6;
+}
+.row__delete > svg:hover > path {
+  fill: #acc2ef;
+}
+.row:hover > .row__fileIcon > svg > path {
   fill: #acc2ef;
 }
 
-.cell, .fileListTable__row:hover__fileIcon, .fileListTable__row:hover__name, .fileListTable__row:hover__date, .fileListTable__row:hover__size {
+.cell, .row__download, .row__delete, .row__fileIcon, .row__name, .row__date, .row__size {
   padding: 0.5rem 1rem;
   justify-self: center;
 }

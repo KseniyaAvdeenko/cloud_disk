@@ -75,7 +75,7 @@ class FilesService {
     }
 
     async downloadFile(refresh, fileId) {
-        const currentUser = await this.getAuthorizedUser(refresh);
+        const currentUser = await this.getAuthorizedUser(refresh)
         const file = await File.findOne({_id: fileId, userId: currentUser._id})
         const path = process.env.FILES_PATH + `\\` + currentUser._id + `\\` + file.path + `\\` + file.name;
         if(!fs.existsSync(path)) return ApiError.BadRequestError('Path does not exist');

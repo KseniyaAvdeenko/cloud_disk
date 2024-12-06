@@ -19,39 +19,62 @@
   width: 100%
   grid-auto-rows: min-content
 
-  &__row, &__rowHead
+.row, .rowHead
     @extend .grid
-    grid-template-columns: .5fr 4fr repeat(4, 1fr)
+    grid-template-columns: .5fr 3.5fr repeat(3, 1fr) .5fr
     border-bottom: .1rem solid $bg300
     gap: 1rem
     padding: .5rem 0
 
-  &__rowHead
+.rowHead
     border-bottom: .2rem solid $bg300
 
-  &__row
-    transition: all .5s ease
-    cursor: pointer
-
-  &__row:hover
+.row
+  transition: all .5s ease
+  cursor: pointer
+  &:hover
     @include transform(scale(1.02))
 
+  &__download,
+  &__delete,
+  &__fileIcon,
+  &__name,
+  &__date,
+  &__size
+    @extend .cell
+  &__date
+    grid-column-start: 4
+  &__name
+    justify-self: start !important
+    grid-column-start: 2
+  &__fileIcon
+    grid-column-start: 1
+  &__size
+    grid-column-start: 5
+  &__download,
+  &__delete,
+  &__fileIcon
+    cursor: pointer
 
-    &__fileIcon, &__name, &__date, &__size
-      @extend .cell
+  &__fileIcon > svg > path
+    fill: $bg200
+    @include transition(all)
 
-    &__name
-      justify-self: start !important
+  &__download
+    grid-column-start: 3
+    & > svg
+      &:hover > path
+        stroke: $primary300
 
-    &__fileIcon
-      cursor: pointer
+  &__delete
+    grid-column-start: 6
+    & > svg
+      &:hover > path
+        fill: $primary300
 
-    &__fileIcon > svg > path
-      fill: $bg200
-      @include transition(all)
-
-  &__row:hover > &__fileIcon > svg > path
+  &:hover > &__fileIcon > svg > path
     fill: $primary300
+
 
 .cell
   padding: .5rem 1rem

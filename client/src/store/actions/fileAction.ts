@@ -65,3 +65,26 @@ export const uploadFile = (dirId: string | null, file: any) => async (dispatch: 
         dispatch(ntfReducer.actions.setError('create file fail'))
     }
 }
+
+export const downLoadFile = async (file: IFile) => {
+    try {
+        // const resp = await fetch(process.env.REACT_APP_API_URL + `/files/download?id=${file._id}`, {
+        //     headers: {
+        //         authorization: `Bearer ${localStorage.access}`
+        //     }
+        // })
+        const resp = await axiosInstance.get(`/files/download?id=${file._id}`, {responseType: 'blob'})
+        if(resp.status === 200){
+            const downloadUrl = URL.createObjectURL(resp.data);
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = file.name;
+            document.body.append(link)
+            link.click();
+            link.remove()
+        }
+    }catch (e) {
+
+    }
+
+}

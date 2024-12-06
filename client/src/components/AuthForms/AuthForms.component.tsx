@@ -1,6 +1,5 @@
 import React, {ChangeEvent, FC, FormEvent, Fragment, useState} from 'react';
 import styles from './AuthForms.module.sass'
-
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import Form from "../../UI/Form";
 import InputContainer from "../../UI/InputContainer";
