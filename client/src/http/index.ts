@@ -3,7 +3,6 @@ import {useAppDispatch} from "../hooks/useAppDispatch";
 import {checkAuth} from "../store/actions/authAction";
 
 
-
 const axiosInstance = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
     withCredentials: true

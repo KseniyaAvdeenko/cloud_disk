@@ -1,12 +1,20 @@
 import React, {FC, Fragment, useEffect, useState} from 'react';
 import {useAppSelector} from "../../../hooks/useAppSelector";
 import {useAppDispatch} from "../../../hooks/useAppDispatch";
-import {createFile, getUserFiles, returnToPrevDir, setDirectoryName} from "../../../store/actions/fileAction";
+import {
+    createFile,
+    getUserFiles,
+    returnToPrevDir,
+    setDirectoryName,
+    uploadFile
+} from "../../../store/actions/fileAction";
 import FileList from "./FileList.component";
 import styles from './Disk.module.sass'
 import Popup from "../../Popup/Popup.component";
 import InputContainer from "../../../UI/InputContainer";
 import Form from "../../../UI/Form";
+import CreateDir from "./CreateDir.component";
+import UploadFile from "./UploadFile.component";
 
 
 const Disk = () => {
@@ -14,10 +22,14 @@ const Disk = () => {
     const dispatch = useAppDispatch()
 
     const [isNewDirPopup, setIsNewDirPopup] = useState<boolean>(false)
+    const [isNewFilePopup, setIsNewFilePopup] = useState<boolean>(false)
     const [newDirName, setNewDirname] = useState<string>('')
     const [backBtn, setBackBtn] = useState<boolean>(true)
+    const [newFiles, setNewFiles] = useState<File[]>([])
+    const [dragEnter, setDragEnter] = useState<boolean>(false)
 
     const createDirPopupClose = () => setIsNewDirPopup(false);
+    const uploadFilePopupClose = () => setIsNewFilePopup(false);
 
     function createNewDir(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault()
@@ -28,7 +40,7 @@ const Disk = () => {
 
     useEffect(() => {
         dispatch(getUserFiles(currentDir))
-        if(!currentDir) setBackBtn(false)
+        if (!currentDir) setBackBtn(false)
     }, [currentDir])
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => setNewDirname(e.target.value)
@@ -37,40 +49,91 @@ const Disk = () => {
         if (dirStack.length >= 1) {
             const backDirId = dirStack.length - 2
             dispatch(returnToPrevDir(dirStack[backDirId]))
-        } else{
+        } else {
             dispatch(returnToPrevDir(null))
             setBackBtn(false)
         }
     }
 
+    const onUploadHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let files: File[] = []
+        if (e.target.files) files = Array.from(e.target.files)
+        setNewFiles(files)
+        files.forEach(file => dispatch(uploadFile(currentDir, file)))
+    }
+
+    const uploadFilesSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        uploadFilePopupClose()
+    }
+
+    const dragEnterHandler = (e: React.DragEvent<HTMLElement>) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setDragEnter(true)
+    }
+
+    const dragLeaveHandler = (e: React.DragEvent<HTMLElement>) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setDragEnter(false)
+    }
+
+    const dragOverHandler = (e: React.DragEvent<HTMLElement>) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setDragEnter(true)
+    }
+
+    const dropHandler = (e: React.DragEvent<HTMLElement>) => {
+        e.preventDefault();
+        e.stopPropagation();
+        let files: File[];
+        if (e.dataTransfer.files) {
+            let files = Array.from(e.dataTransfer.files)
+            setNewFiles(files)
+            files.forEach(file => dispatch(uploadFile(currentDir, file)))
+        }
+        setDragEnter(false)
+    }
+
     return (
         <Fragment>
-            <Popup isOpen={isNewDirPopup} closePopup={createDirPopupClose}>
-                <Form formContainerClass={styles.form}
-                      formClassname={styles.form__container}
-                      formDisplay={'flex'}
-                      onSubmitHandler={createNewDir}
-                      formHeading={'Create new directory'}
-                      button={{classname: styles.main__buttons__button, btnText: 'Create'}}>
-                    <InputContainer containerClass={styles.inputContainer}
-                                    label={'Directory name'}
-                                    onChangeHandler={onChangeHandler}
-                                    value={newDirName} type={'text'}
-                                    placeHolder={'Type here ...'}
-                                    name={'name'} id={'newDirName'} required={true}/>
-                </Form>
-            </Popup>
+            <CreateDir
+                createDirPopupClose={createDirPopupClose}
+                newDirName={newDirName}
+                onChangeHandler={onChangeHandler}
+                createNewDir={createNewDir}
+                isNewDirPopup={isNewDirPopup}
+            />
+            <UploadFile
+                dragEnter={dragEnter}
+                dragEnterHandler={dragEnterHandler}
+                dragLeaveHandler={dragLeaveHandler}
+                dragOverHandler={dragOverHandler}
+                dropHandler={dropHandler}
+                newFiles={newFiles}
+                isNewFilePopup={isNewFilePopup}
+                onUploadHandler={onUploadHandler}
+                uploadFilePopupClose={uploadFilePopupClose}
+                uploadFilesSubmit={uploadFilesSubmit}
+            />
             <main className={styles.main}>
                 <div className={styles.main__buttons}>
-                    <button style={{display: backBtn ? 'inline-block': 'none'}}
-                        onClick={backClickHolder}
-                        className={styles.main__buttons__button}>
+                    <button style={{display: backBtn ? 'inline-block' : 'none'}}
+                            onClick={backClickHolder}
+                            className={styles.main__buttons__button}>
                         Back
                     </button>
                     <button
                         onClick={() => setIsNewDirPopup(true)}
                         className={styles.main__buttons__button}>
                         Create folder
+                    </button>
+                    <button
+                        onClick={() => setIsNewFilePopup(true)}
+                        className={styles.main__buttons__button}>
+                        Upload file
                     </button>
                 </div>
                 {isLoading && 'Loading ...'}

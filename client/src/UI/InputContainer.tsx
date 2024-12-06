@@ -11,7 +11,8 @@ interface IInputContainerProps {
     id: string;
     minLength?: number
     maxLength?: number
-    required: boolean
+    required: boolean;
+    multiple?: boolean
 }
 
 const InputContainer: FC<IInputContainerProps> = ({
@@ -25,9 +26,10 @@ const InputContainer: FC<IInputContainerProps> = ({
                                                       onChangeHandler,
                                                       placeHolder,
                                                       type,
-                                                      required
+                                                      required,
+                                                      multiple
                                                   }) => {
-    return (
+    return type !== "file" ? (
         <div className={containerClass}>
             <label htmlFor={id}>{label}</label>
             <input
@@ -42,7 +44,19 @@ const InputContainer: FC<IInputContainerProps> = ({
                 maxLength={maxLength}
             />
         </div>
-    );
+    ) : (<div className={containerClass}>
+        <label htmlFor={id}>{label}
+            <input
+                type={type}
+                multiple={multiple}
+                name={name}
+                id={id}
+                required={required}
+                onChange={e => onChangeHandler(e)}
+            />
+        </label>
+
+    </div>)
 };
 
 export default InputContainer;

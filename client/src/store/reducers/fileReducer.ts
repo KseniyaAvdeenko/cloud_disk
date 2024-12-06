@@ -55,6 +55,7 @@ export const fileReducer = createSlice({
         createFileSuccess(state, action: PayloadAction<IFile>) {
             state.file = action.payload;
         },
+
         deleteFileSuccess(state) {
             state.file = null
         }

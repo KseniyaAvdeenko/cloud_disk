@@ -8,13 +8,15 @@ const File: FC<{ file: IFile; setBackBtn: Function }> = ({file, setBackBtn}) => 
     const dispatch = useAppDispatch();
 
 
-    const openDirHandler = () => {
-        dispatch(setDirectoryName(file._id))
-        setBackBtn(true)
+    const openDirHandler = (file: IFile) => {
+        if (file.type === 'dir') {
+            dispatch(setDirectoryName(file._id))
+            setBackBtn(true)
+        }
     }
 
     return (
-        <div className={styles.fileListTable__row} onClick={file.type === 'dir' ? openDirHandler : ()=>{}}>
+        <div className={styles.fileListTable__row} onClick={() => openDirHandler(file)}>
             <div className={styles.fileListTable__fileIcon}>{
                 file.type === 'dir'
                     ? <svg width="20" height="16" viewBox="0 0 20 16" fill="none"
