@@ -4,12 +4,14 @@ import authReducer from './reducers/authReducer';
 import userReducer from './reducers/userReducer';
 import fileReducer from './reducers/fileReducer';
 import ntfReducer from './reducers/ntfReducer';
+import uploadedFilesReducer from './reducers/uploadedFilesReducer'
 
 export const rootReducer = combineReducers({
     authReducer,
     userReducer,
     fileReducer,
     ntfReducer,
+    uploadedFilesReducer
 })
 
 export const setupStore = () => {

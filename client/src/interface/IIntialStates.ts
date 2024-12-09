@@ -1,5 +1,5 @@
 import {IUser} from "./IUser";
-import {IFile} from "./IFile";
+import {IFile, IUploadedFile} from "./IFile";
 
 export interface IAuthInitialState {
     isAuth: boolean;
@@ -28,4 +28,9 @@ export interface IFilesInitial {
     dirStack: string[]
     file: IFile | null
     isLoading: boolean;
+}
+
+export interface IUploadedFilesInitial{
+    isVisible: boolean;
+    files: IUploadedFile[]|[];
 }

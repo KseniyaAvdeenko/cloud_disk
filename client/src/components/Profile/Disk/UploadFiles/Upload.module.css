@@ -1,0 +1,146 @@
+.d-flex, .progress__barItems_done, .progress__barItems, .uploadedFiles__item, .uploadedFiles, .inputContainerCommon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.grid, .progress {
+  display: -ms-grid;
+  display: grid;
+}
+
+.commonButton {
+  padding: 1.5rem 2.5rem;
+  width: fit-content;
+  background-color: #1F3A5F;
+  border-radius: 1.5rem;
+  border: none;
+  outline: none;
+  color: #FFFFFF;
+  font-size: 1.8rem;
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.commonButton:hover, .commonButton:active {
+  background: #3D5A80;
+}
+
+.inputContainerCommon {
+  width: 100%;
+  margin-bottom: 2rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.inputContainerCommon > label {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+.inputContainerCommon > input {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  color: #0F1C2E;
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.inputContainerCommon > input:focus {
+  border: none;
+  outline: none;
+}
+.inputContainerCommon > input::placeholder {
+  color: #374357;
+}
+
+.uploadedFiles {
+  margin-bottom: 1rem;
+  width: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: start;
+}
+.uploadedFiles__item {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: start;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+.uploadedFiles__item__name {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.progress {
+  grid-template-columns: 4fr 1fr;
+  width: 100%;
+  column-gap: 0.5rem;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.progress__barItems {
+  border-radius: 1rem;
+  height: 1.5rem;
+  background: #acc2ef;
+  width: 100%;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: start;
+}
+.progress__barItems_undone {
+  border-radius: 1rem;
+  height: 1.5rem;
+  background: #acc2ef;
+}
+.progress__barItems_done {
+  border-radius: 1rem;
+  height: 1.5rem;
+  padding: 0.3rem;
+  background: #1F3A5F;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+/*# sourceMappingURL=Upload.module.css.map */

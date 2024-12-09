@@ -1,0 +1,43 @@
+@import "../../../../App.module"
+
+.uploadedFiles
+  margin-bottom: 1rem
+  width: 100%
+  @include flex(column, start, start)
+
+  &__item
+    @include flex(column, start, start)
+    margin-bottom: 1.5rem
+    width: 100%
+
+    &__name
+      margin-bottom: 1rem
+      font-size: 1.2rem
+
+
+.progress
+  @extend .grid
+  grid-template-columns: 4fr 1fr
+  width: 100%
+  column-gap: .5rem
+  @include flex-ai(center)
+
+  &__barItems
+    border-radius: 1rem
+    height: 1.5rem
+    background: $primary300
+    width: 100%
+    @include flex(row, start, start)
+
+    &_undone
+      border-radius: 1rem
+      height: 1.5rem
+      background: $primary300
+
+    &_done
+      border-radius: 1rem
+      height: 1.5rem
+      padding: .3rem
+      background: $primary100
+      @include flex(row, center, center)
+      font-size: 1rem

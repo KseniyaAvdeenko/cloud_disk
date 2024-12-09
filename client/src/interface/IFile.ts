@@ -1,3 +1,5 @@
+import exp from "constants";
+
 export interface IFileBase{
     name: string;
     type: string;
@@ -12,3 +14,10 @@ export interface IFileBase{
 export interface IFile extends IFileBase{
     _id: string
 }
+
+export interface IUploadedFile{
+    id: number;
+    fileName: string;
+    progress: number;
+}
+

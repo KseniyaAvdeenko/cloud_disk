@@ -1,9 +1,10 @@
 import {AppDispatch} from "../store";
 import {fileReducer} from "../reducers/fileReducer";
 import axiosInstance from "../../http";
-import {IFile} from "../../interface/IFile";
+import {IFile, IUploadedFile} from "../../interface/IFile";
 import {ntfReducer} from "../reducers/ntfReducer";
 import {AxiosProgressEvent} from "axios";
+import {addUploadedFile, changeUploadedFile, showUploadedFiles} from "./uploadedFilesAction";
 
 export const getUserFiles = (dirId: string | null) => async (dispatch: AppDispatch) => {
     try {
@@ -40,19 +41,23 @@ export const returnToPrevDir = (dirName: string | null) => async (dispatch: AppD
         : dispatch(fileReducer.actions.goBack(null))
 }
 
-export const uploadFile = (dirId: string | null, file: any) => async (dispatch: AppDispatch) => {
+export const uploadFile = (dirId: string | null, file: File) => async (dispatch: AppDispatch) => {
     try {
         const formData = new FormData();
-        formData.append('file', file)
-        if(dirId) formData.append('parent', dirId)
+        formData.append('file', file);
+        if (dirId) formData.append('parent', dirId);
+        let uploadedFile = {fileName: file['name'], progress: 0, id: Date.now()};
+        dispatch(showUploadedFiles());
+        dispatch(addUploadedFile(uploadedFile));
+        const upFile = structuredClone(uploadedFile)
         const resp = await axiosInstance.post<IFile>(
             `/files/upload`,
             formData,
             {
                 onUploadProgress: (progressEvent: AxiosProgressEvent) => {
                     if (progressEvent.total) {
-                        const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-                        console.log(`Upload progress: ${progress}%`);
+                        upFile.progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                        dispatch(changeUploadedFile(upFile))
                     }
                 }
             });
@@ -64,10 +69,10 @@ export const uploadFile = (dirId: string | null, file: any) => async (dispatch: 
     }
 }
 
-export const downLoadFile = (file: IFile) => async (dispatch: AppDispatch) =>{
+export const downLoadFile = (file: IFile) => async (dispatch: AppDispatch) => {
     try {
         const resp = await axiosInstance.get(`/files/download?id=${file._id}`, {responseType: 'blob'})
-        if(resp.status === 200){
+        if (resp.status === 200) {
             const downloadUrl = URL.createObjectURL(resp.data);
             const link = document.createElement('a');
             link.href = downloadUrl;
@@ -76,14 +81,14 @@ export const downLoadFile = (file: IFile) => async (dispatch: AppDispatch) =>{
             link.click();
             link.remove()
         }
-    }catch (e) {
+    } catch (e) {
         dispatch(ntfReducer.actions.setError('create file fail'))
     }
 }
 
-export const deleteFile = (fileId: string, dirId: string|null) => async (dispatch: AppDispatch) => {
+export const deleteFile = (fileId: string, dirId: string | null) => async (dispatch: AppDispatch) => {
     try {
-        const resp = await axiosInstance.delete<{message: string}>(`/files/?id=${fileId}`);
+        const resp = await axiosInstance.delete<{ message: string }>(`/files/?id=${fileId}`);
         dispatch(fileReducer.actions.deleteFileSuccess())
         resp.data.message
             ? dispatch(ntfReducer.actions.setSuccess(resp.data.message))

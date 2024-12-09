@@ -5,7 +5,8 @@ import {createFile, getUserFiles, returnToPrevDir, uploadFile} from "../../../st
 import FileList from "./FileList.component";
 import styles from './Disk.module.sass'
 import CreateDir from "./CreateDir.component";
-import UploadFile from "./UploadFile.component";
+import UploadFileForm from "./UploadFiles/UploadFileForm.component";
+import {hideUploadedFiles, removeUploadedFiles} from "../../../store/actions/uploadedFilesAction";
 
 
 const Disk = () => {
@@ -16,7 +17,6 @@ const Disk = () => {
     const [isNewFilePopup, setIsNewFilePopup] = useState<boolean>(false)
     const [newDirName, setNewDirname] = useState<string>('')
     const [backBtn, setBackBtn] = useState<boolean>(true)
-    const [newFiles, setNewFiles] = useState<File[]>([])
     const [dragEnter, setDragEnter] = useState<boolean>(false)
 
     const createDirPopupClose = () => setIsNewDirPopup(false);
@@ -49,13 +49,14 @@ const Disk = () => {
     const onUploadHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         let files: File[] = []
         if (e.target.files) files = Array.from(e.target.files)
-        setNewFiles(files)
         files.forEach(file => dispatch(uploadFile(currentDir, file)))
     }
 
-    const uploadFilesSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const closeUploadFiles = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         uploadFilePopupClose()
+        dispatch(hideUploadedFiles())
+        dispatch(removeUploadedFiles())
     }
 
     const dragEnterHandler = (e: React.DragEvent<HTMLElement>) => {
@@ -82,7 +83,6 @@ const Disk = () => {
         let files: File[];
         if (e.dataTransfer.files) {
             files = Array.from(e.dataTransfer.files)
-            setNewFiles(files)
             files.forEach(file => dispatch(uploadFile(currentDir, file)))
         }
         setDragEnter(false)
@@ -97,17 +97,16 @@ const Disk = () => {
                 createNewDir={createNewDir}
                 isNewDirPopup={isNewDirPopup}
             />
-            <UploadFile
+            <UploadFileForm
                 dragEnter={dragEnter}
                 dragEnterHandler={dragEnterHandler}
                 dragLeaveHandler={dragLeaveHandler}
                 dragOverHandler={dragOverHandler}
                 dropHandler={dropHandler}
-                newFiles={newFiles}
                 isNewFilePopup={isNewFilePopup}
                 onUploadHandler={onUploadHandler}
                 uploadFilePopupClose={uploadFilePopupClose}
-                uploadFilesSubmit={uploadFilesSubmit}
+                closeUploadFiles={closeUploadFiles}
             />
             <main className={styles.main}>
                 <div className={styles.main__buttons}>
