@@ -12,13 +12,14 @@ export interface INtfInitialState {
 }
 
 export interface IUserInitialState {
+    isLoading: boolean;
     currentUser: IUser | null
 }
 
 export interface IAuthForm {
     activeForm: 'signIn' | 'signUp';
-    signInFormDisplay: 'flex' | 'none'
-    signUpFormDisplay: 'flex' | 'none'
+    signInFormDisplay: string;
+    signUpFormDisplay: string;
 }
 
 export interface IFilesInitial {

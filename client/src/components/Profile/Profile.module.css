@@ -1,7 +1,7 @@
 .d-flex, .signOut, .inputContainerCommon {
-  display: -webkit-box !important;
-  display: -ms-flexbox !important;
-  display: flex !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .grid, .currentUser, .sidebar, .profile {
@@ -100,9 +100,14 @@
   justify-self: center;
 }
 .currentUser__avatar {
+  justify-self: center;
   border-radius: 50%;
   width: 7rem;
+  cursor: pointer;
   height: 7rem;
+}
+.currentUser__avatar > input[type=file] {
+  display: none;
 }
 
 /*# sourceMappingURL=Profile.module.css.map */

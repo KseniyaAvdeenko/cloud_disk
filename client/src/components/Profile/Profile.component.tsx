@@ -7,12 +7,10 @@ import Disk from "./Disk/Disk.component";
 
 
 const ProfileComponent = () => {
-    const {currentUser} = useAppSelector(state => state.userReducer);
-
     return (
         <Fragment>
             <div className={styles.profile}>
-                <Sidebar currentUser={currentUser}/>
+                <Sidebar/>
                 <Disk/>
             </div>
         </Fragment>

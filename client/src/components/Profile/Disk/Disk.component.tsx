@@ -81,7 +81,7 @@ const Disk = () => {
         e.stopPropagation();
         let files: File[];
         if (e.dataTransfer.files) {
-            let files = Array.from(e.dataTransfer.files)
+            files = Array.from(e.dataTransfer.files)
             setNewFiles(files)
             files.forEach(file => dispatch(uploadFile(currentDir, file)))
         }

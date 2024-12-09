@@ -7,10 +7,8 @@
   height: 100vh
   z-index: 2
   @include blur(.3rem)
-  display: none
+  @include flex(column, center, center)
 
-  &__open
-    @include flex(column, center, center)
 
 .inner
   background: $primary200

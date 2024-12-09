@@ -1,7 +1,7 @@
 .d-flex, .inputContainerCommon {
-  display: -webkit-box !important;
-  display: -ms-flexbox !important;
-  display: flex !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .grid, .layout {

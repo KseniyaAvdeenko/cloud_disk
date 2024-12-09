@@ -22,7 +22,6 @@ const AuthForms: FC<IAuthFormsProps> = ({authForm, activateSignUpForm, activateS
         dispatch(signInUser(sInUser.email, sInUser.password))
         setSignInUser({email: '', password: ''})
     }
-
     const onSubmitSignUp = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         console.log(JSON.stringify(sUpUser))
@@ -39,7 +38,6 @@ const AuthForms: FC<IAuthFormsProps> = ({authForm, activateSignUpForm, activateS
         ...sUpUser,
         [e.target.name]: e.target.value
     })
-
     return (
         <Fragment>
             <main className={styles.authForms}>

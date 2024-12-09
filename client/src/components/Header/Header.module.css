@@ -1,7 +1,7 @@
 .d-flex, .header__auth, .header, .inputContainerCommon {
-  display: -webkit-box !important;
-  display: -ms-flexbox !important;
-  display: flex !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .grid {

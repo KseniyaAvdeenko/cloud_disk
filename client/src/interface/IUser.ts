@@ -1,6 +1,5 @@
 export interface IUserBase {
     email: string,
-    password: string,
     diskSpace: number,
     usedSpace: number,
     avatar?: string,

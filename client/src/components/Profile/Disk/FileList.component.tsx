@@ -6,7 +6,7 @@ import File from "./File.component";
 
 interface IFileListProps {
     files: IFile[] | [] | null;
-    setBackBtn: Function
+    setBackBtn: Function;
 }
 
 const FileList: FC<IFileListProps> = ({files, setBackBtn}) => {

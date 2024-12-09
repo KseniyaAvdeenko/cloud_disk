@@ -10,7 +10,7 @@ interface IPopupProps {
 const Popup: FC<IPopupProps> = ({isOpen, closePopup, children}) => {
 
     return (
-        <div onClick={()=>closePopup()} className={isOpen ? [styles.popup, styles.popup__open].join(' ') : styles.popup}>
+        <div onClick={()=>closePopup()} className={styles.popup} style={{display: isOpen ? 'flex':'none'}}>
             <div className={styles.inner} onClick={e => e.stopPropagation()}>
                 {children}
             </div>

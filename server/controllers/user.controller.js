@@ -66,6 +66,18 @@ class UserController {
             next(e)
         }
     }
+    async updateCurrentUserAvatar(req, res, next) {
+        try {
+            const {refreshToken} = req.cookies;
+            if (!refreshToken) return next(ApiError.UnauthorizedError())
+            const data = req.files;
+
+            const user = await userService.updateCurrentUserAvatar(refreshToken, data)
+            res.json(user)
+        } catch (e) {
+            next(e)
+        }
+    }
 }
 
 module.exports = new UserController();

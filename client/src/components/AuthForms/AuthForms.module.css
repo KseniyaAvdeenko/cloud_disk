@@ -1,7 +1,7 @@
 .d-flex, .authForm__inner, .authForm__outer, .authForms, .inputContainerCommon, .authInputContainer {
-  display: -webkit-box !important;
-  display: -ms-flexbox !important;
-  display: flex !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .grid {

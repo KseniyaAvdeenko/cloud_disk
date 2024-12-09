@@ -1,7 +1,7 @@
 .d-flex, .dragFiles, .inputContainer > label[for=file], .form__container, .form, .main, .inputContainerCommon, .inputContainer {
-  display: -webkit-box !important;
-  display: -ms-flexbox !important;
-  display: flex !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .grid, .row, .rowHead, .fileListTable {

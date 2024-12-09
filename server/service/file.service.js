@@ -1,4 +1,5 @@
 const fs = require('fs');
+const User = require('../models/user.model')
 const File = require('../models/file.model');
 const userService = require('./user.service');
 const ApiError = require('../exceptions/apiError');
@@ -8,16 +9,42 @@ class FilesService {
         return process.env.FILES_PATH + '\\' + file.userId + '\\' + file.path;
     }
 
-    fileDelete(file) {
-        const filePath = this.getFilePath(file);
-        if (file.type === 'dir') {
-            const directory = fs.readdirSync(filePath);
-            if(directory.length !== 0) return ApiError.BadRequestError('Directory is not empty')
-            fs.rmdirSync(filePath)
-        } else {
-            fs.unlinkSync(filePath)
+    async deleteFileAndChildren(file) {
+        if (file.children && file.children.length > 0) {
+            for (const childId of file.children) {
+                const child = await File.findById(childId);
+                if (child) {
+                    await this.deleteFileAndChildren(child);
+                }
+            }
         }
+        await this.removeFileFromDB(file);
+        this.removeFileFromStorage(file);
     }
+
+    async removeFileFromDB(file) {
+        const user = await User.findById(file.userId);
+        if (user) {
+            user.files = user.files.filter(id => id !== file._id);
+            await user.save();
+        }
+
+        if (file.parent) {
+            const parent = await File.findById(file.parent);
+            if (parent) {
+                parent.children = parent.children.filter(id => id !== file._id);
+                await parent.save();
+            }
+        }
+        await file.deleteOne();
+    }
+
+
+    removeFileFromStorage(file) {
+        const filePath = this.getFilePath(file);
+        file.type === 'dir' ? fs.rmdirSync(filePath) : fs.unlinkSync(filePath)
+    }
+
 
     createDir(file) {
         const filePath = process.env.FILES_PATH + `\\${file.userId}\\${file.path}`
@@ -42,11 +69,15 @@ class FilesService {
         if (!parentFile) {
             newFile.path = name;
             await this.createDir(newFile);
+            currentUser.files.push(newFile._id);
+            await currentUser.save()
         } else {
             newFile.path = `${parentFile.path}\\${newFile.name}`;
             await this.createDir(newFile);
             parentFile.children.push(newFile._id);
             await parentFile.save()
+            currentUser.files.push(newFile._id);
+            await currentUser.save()
         }
         await newFile.save();
         return newFile
@@ -82,6 +113,10 @@ class FilesService {
             parent: parent?._id,
             userId: currentUser._id
         })
+        if (parent) {
+            parent.children.push(dbFile._id);
+            await parent.save()
+        }
         await dbFile.save();
         await currentUser.save();
         return dbFile;
@@ -99,8 +134,7 @@ class FilesService {
         const currentUser = await userService.getAuthorizedUser(refresh);
         const file = await File.findOne({_id: fileId, userId: currentUser._id});
         if (!file) return ApiError.BadRequestError('File does not exist');
-        this.fileDelete(file)
-        await file.deleteOne()
+        await this.deleteFileAndChildren(file);
     }
 }
 

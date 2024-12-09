@@ -1,4 +1,5 @@
 import React, {FC} from 'react';
+import Input from "./Input";
 
 interface IInputContainerProps {
     containerClass: string;
@@ -29,34 +30,17 @@ const InputContainer: FC<IInputContainerProps> = ({
                                                       required,
                                                       multiple
                                                   }) => {
-    return type !== "file" ? (
+    return (
         <div className={containerClass}>
             <label htmlFor={id}>{label}</label>
-            <input
-                type={type}
-                value={value}
-                placeholder={placeHolder}
-                name={name}
-                id={id}
-                required={required}
-                onChange={e => onChangeHandler(e)}
-                minLength={minLength}
-                maxLength={maxLength}
-            />
+            <Input
+                onChangeHandler={onChangeHandler}
+                value={value} type={type}
+                placeHolder={placeHolder} maxLength={maxLength}
+                name={name} id={id} multiple={multiple}
+                required={required} minLength={minLength}/>
         </div>
-    ) : (<div className={containerClass}>
-        <label htmlFor={id}>{label}
-            <input
-                type={type}
-                multiple={multiple}
-                name={name}
-                id={id}
-                required={required}
-                onChange={e => onChangeHandler(e)}
-            />
-        </label>
-
-    </div>)
+    )
 };
 
 export default InputContainer;
