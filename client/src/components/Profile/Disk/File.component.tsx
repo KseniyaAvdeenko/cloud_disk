@@ -4,6 +4,7 @@ import styles from "./Disk.module.sass";
 import {useAppDispatch} from "../../../hooks/useAppDispatch";
 import {deleteFile, downLoadFile, setDirectoryName} from "../../../store/actions/fileAction";
 import {useAppSelector} from "../../../hooks/useAppSelector";
+import sizeFormat from "../../../utils/sizeFormat";
 
 
 interface IFileProps {
@@ -66,7 +67,7 @@ const File: FC<IFileProps> = ({file, setBackBtn}) => {
             )}
             <div className={styles.row__date}>{file.date.slice(0, 10)}</div>
             {file.type !== "dir" && (
-                <div className={styles.row__size}>{file.size}</div>
+                <div className={styles.row__size}>{sizeFormat(file.size)}</div>
             )}
             <div className={styles.row__delete} onClick={deleteFileHandler}>
                 <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
