@@ -20,7 +20,9 @@ const FileList: FC<IFileListProps> = ({files, setBackBtn}) => {
                 <div className={styles.row__size}>Size</div>
                 <div className={styles.cell}></div>
             </div>
-            {files && files.map(file => (<File file={file} key={file._id} setBackBtn={setBackBtn}/>))}
+            {files && files.map(file => (
+                <File file={file} key={file._id} setBackBtn={setBackBtn}/>
+            ))}
         </div>
     );
 };
