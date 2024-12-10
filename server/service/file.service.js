@@ -83,9 +83,24 @@ class FilesService {
         return newFile
     }
 
-    async getFiles(refresh, parent) {
+    async getFiles(refresh, parent, sort) {
         const currentUser = await userService.getAuthorizedUser(refresh);
-        return File.find({userId: currentUser._id, parent: parent});
+        let files;
+            switch (sort) {
+                case "name":
+                    files = await File.find({userId: currentUser._id, parent: parent}).sort({name: 1});
+                    break;
+                case "type":
+                    files = await File.find({userId: currentUser._id, parent: parent}).sort({type: 1});
+                    break;
+                case "date":
+                    files = await File.find({userId: currentUser._id, parent: parent}).sort({date: 1});
+                    break;
+                default:
+                   files = await File.find({userId: currentUser._id, parent: parent});
+                   break;
+            }
+        return files;
     }
 
     async uploadFiles(refresh, id, file) {

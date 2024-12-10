@@ -20,9 +20,10 @@ class FileController {
 
     async getUserFiles(req, res, next) {
         try {
+            const {sort, parent} = req.query;
             const {refreshToken} = req.cookies;
             if (!refreshToken) return next(ApiError.UnauthorizedError())
-            const files = await fileService.getFiles(refreshToken, req.query.parent)
+            const files = await fileService.getFiles(refreshToken, parent, sort)
             return res.status(200).json(files)
         } catch (e) {
             next(e)
@@ -42,23 +43,24 @@ class FileController {
     }
 
     async downLoadFile(req, res, next) {
-        try{
+        try {
             const {refreshToken} = req.cookies;
             if (!refreshToken) return next(ApiError.UnauthorizedError())
             const file = await fileService.downloadFile(refreshToken, req.query.id)
             res.download(file.path, file.file.name)
-        }catch (e) {
+        } catch (e) {
             next(e)
         }
 
     }
-    async deleteFile(req, res, next){
-        try{
+
+    async deleteFile(req, res, next) {
+        try {
             const {refreshToken} = req.cookies;
             if (!refreshToken) return next(ApiError.UnauthorizedError())
             await fileService.deleteFile(refreshToken, req.query.id);
             return res.status(204).json({message: 'File/Folder is deleted successfully'})
-        }catch (e) {
+        } catch (e) {
             next(e)
         }
     }
