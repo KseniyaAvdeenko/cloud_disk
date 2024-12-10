@@ -7,10 +7,12 @@ import styles from './Disk.module.sass'
 import CreateDir from "./CreateDir.component";
 import UploadFileForm from "./UploadFiles/UploadFileForm.component";
 import {hideUploadedFiles, removeUploadedFiles} from "../../../store/actions/uploadedFilesAction";
+import NavPanel from "./NavPanel.component";
+import Loader from "../../../UI/Loader/Loader";
 
 
 const Disk = () => {
-    const {currentDir, files, dirStack, isLoading} = useAppSelector(state => state.fileReducer)
+    const {currentDir, files, dirStack, isLoading, sort} = useAppSelector(state => state.fileReducer)
     const dispatch = useAppDispatch()
 
     const [isNewDirPopup, setIsNewDirPopup] = useState<boolean>(false)
@@ -30,9 +32,9 @@ const Disk = () => {
     }
 
     useEffect(() => {
-        dispatch(getUserFiles(currentDir))
+        dispatch(getUserFiles(currentDir, sort))
         if (!currentDir) setBackBtn(false)
-    }, [currentDir])
+    }, [currentDir, sort])
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => setNewDirname(e.target.value)
 
@@ -88,6 +90,8 @@ const Disk = () => {
         setDragEnter(false)
     }
 
+    if(isLoading) return (<Loader/>)
+
     return (
         <Fragment>
             <CreateDir
@@ -109,24 +113,12 @@ const Disk = () => {
                 closeUploadFiles={closeUploadFiles}
             />
             <main className={styles.main}>
-                <div className={styles.main__buttons}>
-                    <button style={{visibility: backBtn ? 'visible' : 'hidden'}}
-                            onClick={backClickHolder}
-                            className={styles.main__buttons__button}>
-                        Back
-                    </button>
-                    <button
-                        onClick={() => setIsNewDirPopup(true)}
-                        className={styles.main__buttons__button}>
-                        Create folder
-                    </button>
-                    <button
-                        onClick={() => setIsNewFilePopup(true)}
-                        className={styles.main__buttons__button}>
-                        Upload file
-                    </button>
-                </div>
-                {isLoading && 'Loading ...'}
+                <NavPanel
+                    backBtn={backBtn}
+                    backClickHolder={backClickHolder}
+                    setIsNewDirPopup={setIsNewDirPopup}
+                    setIsNewFilePopup={setIsNewFilePopup}
+                />
                 <FileList files={files} setBackBtn={setBackBtn}/>
             </main>
         </Fragment>

@@ -5,11 +5,16 @@ import {IFile, IUploadedFile} from "../../interface/IFile";
 import {ntfReducer} from "../reducers/ntfReducer";
 import {AxiosProgressEvent} from "axios";
 import {addUploadedFile, changeUploadedFile, showUploadedFiles} from "./uploadedFilesAction";
+import {Sort} from "../../interface/IIntialStates";
 
-export const getUserFiles = (dirId: string | null) => async (dispatch: AppDispatch) => {
+export const getUserFiles = (dirId: string | null, sort: string) => async (dispatch: AppDispatch) => {
     try {
+        let url = `/files`
+        if(dirId) url = `/files?parent=${dirId}`;
+        if(sort) url = `/files?sort=${sort}`;
+        if(dirId && sort) url = `/files?parent=${dirId}&sort=${sort}`;
         dispatch(fileReducer.actions.fetchFiles())
-        const resp = await axiosInstance.get<IFile[]>(`/files${dirId ? '?parent=' + dirId : ''}`);
+        const resp = await axiosInstance.get<IFile[]>(url);
         dispatch(fileReducer.actions.loadFilesSuccess(resp.data))
     } catch (e) {
         dispatch(fileReducer.actions.loadFilesFail())
@@ -22,7 +27,7 @@ export const createFile = (dirId: string | null, name: string) => async (dispatc
         const resp = await axiosInstance.post<IFile>(`/files`, {name, parent: dirId, type: "dir"});
         dispatch(fileReducer.actions.createFileSuccess(resp.data))
         dispatch(ntfReducer.actions.setSuccess('file created successfully'))
-        dispatch(getUserFiles(dirId))
+        dispatch(getUserFiles(dirId, localStorage.sort || 'type'))
     } catch (e) {
         console.log(e)
         dispatch(ntfReducer.actions.setError('create file fail'))
@@ -63,7 +68,7 @@ export const uploadFile = (dirId: string | null, file: File) => async (dispatch:
             });
         dispatch(fileReducer.actions.createFileSuccess(resp.data))
         dispatch(ntfReducer.actions.setSuccess('file created successfully'))
-        dispatch(getUserFiles(dirId))
+        dispatch(getUserFiles(dirId, localStorage.sort || 'type'))
     } catch (e) {
         dispatch(ntfReducer.actions.setError('create file fail'))
     }
@@ -93,9 +98,10 @@ export const deleteFile = (fileId: string, dirId: string | null) => async (dispa
         resp.data.message
             ? dispatch(ntfReducer.actions.setSuccess(resp.data.message))
             : dispatch(ntfReducer.actions.setSuccess('File deleted successfully'))
-        dispatch(getUserFiles(dirId))
+        dispatch(getUserFiles(dirId, localStorage.sort || 'type'))
     } catch (e) {
-        console.log(e)
         dispatch(ntfReducer.actions.setError('delete file fail'))
     }
 }
+
+export const changeSorting = (sort: string) => async (dispatch: AppDispatch) => dispatch(fileReducer.actions.changeSortingMethod(sort))

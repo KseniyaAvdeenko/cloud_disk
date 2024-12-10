@@ -23,6 +23,7 @@ const FileList: FC<IFileListProps> = ({files, setBackBtn}) => {
             {files && files.map(file => (
                 <File file={file} key={file._id} setBackBtn={setBackBtn}/>
             ))}
+            {files && !files.length && (<div className={styles.centered}>There is not any file</div>)}
         </div>
     );
 };

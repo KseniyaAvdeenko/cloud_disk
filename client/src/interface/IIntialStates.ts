@@ -21,13 +21,14 @@ export interface IAuthForm {
     signInFormDisplay: string;
     signUpFormDisplay: string;
 }
-
+export type Sort = 'name' |'type'| 'date'
 export interface IFilesInitial {
     files: IFile[] | [];
     currentDir: string|null
     dirStack: string[]
     file: IFile | null
     isLoading: boolean;
+    sort: string;
 }
 
 export interface IUploadedFilesInitial{

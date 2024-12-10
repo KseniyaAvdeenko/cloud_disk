@@ -12,6 +12,10 @@ $accent200: #cee8ff
 $text100: #FFFFFF
 $text200: #e0e0e0
 
+@mixin boxShadowMultiple($value1, $value2, $value3,$value4, $value5)
+  -webkit-box-shadow: $value1, $value2, $value3,$value4, $value5
+  box-shadow: $value1, $value2, $value3,$value4, $value5
+
 @mixin blur($value)
   -webkit-backdrop-filter: blur($value)
   backdrop-filter: blur($value)
@@ -20,7 +24,6 @@ $text200: #e0e0e0
   -webkit-transition: $prop .5s ease
   -o-transition: $prop .5s ease
   transition: $prop .5s ease
-
 
 @mixin transform($func)
   -webkit-transform: $func
