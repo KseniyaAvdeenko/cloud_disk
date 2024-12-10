@@ -29,6 +29,17 @@ class FileController {
             next(e)
         }
     }
+    async searchFiles(req, res, next) {
+        try {
+            const {search} = req.query;
+            const {refreshToken} = req.cookies;
+            if (!refreshToken) return next(ApiError.UnauthorizedError())
+            const files = await fileService.searchFiles(refreshToken, search)
+            return res.status(200).json(files)
+        } catch (e) {
+            next(e)
+        }
+    }
 
     async uploadFile(req, res, next) {
         try {

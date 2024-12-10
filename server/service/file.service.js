@@ -102,7 +102,10 @@ class FilesService {
             }
         return files;
     }
-
+    async searchFiles(refresh, search) {
+        const currentUser = await userService.getAuthorizedUser(refresh);
+        return File.find({userId: currentUser._id}).where({name: new RegExp(search, i)});
+    }
     async uploadFiles(refresh, id, file) {
         const currentUser = await userService.getAuthorizedUser(refresh);
         const parent = await File.findOne({userId: currentUser._id, _id: id})
