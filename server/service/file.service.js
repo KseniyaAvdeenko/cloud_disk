@@ -86,26 +86,29 @@ class FilesService {
     async getFiles(refresh, parent, sort) {
         const currentUser = await userService.getAuthorizedUser(refresh);
         let files;
-            switch (sort) {
-                case "name":
-                    files = await File.find({userId: currentUser._id, parent: parent}).sort({name: 1});
-                    break;
-                case "type":
-                    files = await File.find({userId: currentUser._id, parent: parent}).sort({type: 1});
-                    break;
-                case "date":
-                    files = await File.find({userId: currentUser._id, parent: parent}).sort({date: 1});
-                    break;
-                default:
-                   files = await File.find({userId: currentUser._id, parent: parent});
-                   break;
-            }
+        switch (sort) {
+            case "name":
+                files = await File.find({userId: currentUser._id, parent: parent}).sort({name: 1});
+                break;
+            case "type":
+                files = await File.find({userId: currentUser._id, parent: parent}).sort({type: 1});
+                break;
+            case "date":
+                files = await File.find({userId: currentUser._id, parent: parent}).sort({date: 1});
+                break;
+            default:
+                files = await File.find({userId: currentUser._id, parent: parent});
+                break;
+        }
         return files;
     }
+
     async searchFiles(refresh, search) {
         const currentUser = await userService.getAuthorizedUser(refresh);
-        return File.find({userId: currentUser._id}).where({name: new RegExp(search, i)});
+        const files = await File.find({userId: currentUser._id});
+        return files.filter(file => file.name.includes(search))
     }
+
     async uploadFiles(refresh, id, file) {
         const currentUser = await userService.getAuthorizedUser(refresh);
         const parent = await File.findOne({userId: currentUser._id, _id: id})

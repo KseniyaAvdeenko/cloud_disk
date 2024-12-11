@@ -1,0 +1,50 @@
+@import "../../../App.module"
+.sidebar
+  border-right: .1rem solid $bg300
+  @extend .grid
+  grid-auto-rows: min-content
+  row-gap: 1rem
+  padding: 1rem
+
+.signOut
+  cursor: pointer
+  @include flex(row, start, center)
+  & > img
+    margin-right: 1rem
+
+.currentUser
+  @extend .grid
+  grid-auto-rows: min-content
+  row-gap: 1rem
+  & > div
+    justify-self: center
+  &__avatar
+    justify-self: center
+    border-radius: 50%
+    width: 7rem
+    cursor: pointer
+    height: 7rem
+    &> input[type="file"]
+      display: none
+
+  &__diskSpace
+    width: 100%
+    @extend .grid
+    grid-auto-rows: min-content
+
+
+    &__memory
+      height: 1rem
+      width: 100%
+      border-radius: 1rem
+      background: $accent200
+      margin-top: 1rem
+      @include flex(row, start, start)
+      row-gap: 1rem
+      &_used, &_free
+        height: 1rem
+        border-radius: 1rem
+      &_free
+         background: $accent200
+      &_used
+        background: $primary100

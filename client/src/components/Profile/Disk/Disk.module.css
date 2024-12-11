@@ -1,4 +1,4 @@
-.d-flex, .centered, .dragFiles, .inputContainer > label[for=file], .form__container, .form, .main__buttons, .main, .inputContainerCommon, .inputContainer {
+.d-flex, .centered, .dragFiles, .inputContainer > label[for=file], .form__container, .form, .main__buttons, .main, .inputContainerCommon, .inputContainer, .main__searching {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -26,7 +26,7 @@
   background: #3D5A80;
 }
 
-.inputContainerCommon, .inputContainer {
+.inputContainerCommon, .inputContainer, .main__searching {
   width: 100%;
   margin-bottom: 2rem;
   -webkit-box-orient: vertical;
@@ -40,11 +40,11 @@
   -ms-flex-pack: center;
   justify-content: center;
 }
-.inputContainerCommon > label, .inputContainer > label {
+.inputContainerCommon > label, .inputContainer > label, .main__searching > label {
   margin-bottom: 1rem;
   font-size: 1.8rem;
 }
-.inputContainerCommon > input, .inputContainer > input {
+.inputContainerCommon > input, .inputContainer > input, .main__searching > input {
   width: 100%;
   padding: 1rem;
   border-radius: 1rem;
@@ -55,11 +55,11 @@
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
-.inputContainerCommon > input:focus, .inputContainer > input:focus {
+.inputContainerCommon > input:focus, .inputContainer > input:focus, .main__searching > input:focus {
   border: none;
   outline: none;
 }
-.inputContainerCommon > input::placeholder, .inputContainer > input::placeholder {
+.inputContainerCommon > input::placeholder, .inputContainer > input::placeholder, .main__searching > input::placeholder {
   color: #374357;
 }
 
@@ -102,6 +102,10 @@
   background: #1F3A5F;
   border: none;
   outline: none;
+}
+.main__searching {
+  width: 20%;
+  margin-bottom: 0;
 }
 
 .fileListTable {

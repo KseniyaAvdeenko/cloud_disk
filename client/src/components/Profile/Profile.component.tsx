@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import styles from './Profile.module.sass'
-import Sidebar from "./Sidebar.component";
+import Sidebar from "./Sidebar/Sidebar.component";
 import Disk from "./Disk/Disk.component";
 
 

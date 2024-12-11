@@ -1,13 +1,13 @@
-import React, {FC, useState} from 'react';
-import styles from "./Profile.module.sass";
-import {IUser} from "../../interface/IUser";
-import {useAppDispatch} from "../../hooks/useAppDispatch";
-import {signOutUser} from "../../store/actions/authAction";
-import SignOutIcon from '../../assets/img/signOut.svg'
-import Input from "../../UI/Input";
-import {useAppSelector} from "../../hooks/useAppSelector";
-import {updateCurrentUser} from "../../store/actions/userAction";
-import Loader from "../../UI/Loader/Loader";
+import React, {FC} from 'react';
+import styles from "./Sidebar.module.sass";
+import {useAppDispatch} from "../../../hooks/useAppDispatch";
+import {signOutUser} from "../../../store/actions/authAction";
+import SignOutIcon from '../../../assets/img/signOut.svg'
+import Input from "../../../UI/Input";
+import {useAppSelector} from "../../../hooks/useAppSelector";
+import {updateCurrentUser} from "../../../store/actions/userAction";
+import Loader from "../../../UI/Loader/Loader";
+import sizeFormat from "../../../utils/sizeFormat";
 
 const Sidebar: FC = () => {
      const {currentUser, isLoading} = useAppSelector(state => state.userReducer);
@@ -22,7 +22,7 @@ const Sidebar: FC = () => {
 
     return (
         <aside className={styles.sidebar}>
-            <div className={styles.currentUser}>
+            {currentUser && (<div className={styles.currentUser}>
                 <label htmlFor={'avatar'} className={styles.currentUser__avatar} style={{
                     background: currentUser?.avatar ? `url(${currentUser.avatar}) 100% 100% / cover no-repeat` : '#3D5A80'
                 }}>
@@ -37,8 +37,15 @@ const Sidebar: FC = () => {
                         multiple={false}
                     />
                 </label>
-                <div>{currentUser && currentUser.email}</div>
-            </div>
+                <div><b>{currentUser.email}</b></div>
+                <div className={styles.currentUser__diskSpace}>
+                    <p><b>Disk space:</b> {sizeFormat(currentUser.diskSpace)}</p>
+                    <div className={styles.currentUser__diskSpace__memory}>
+                        <div className={styles.currentUser__diskSpace__memory_used} style={{width: (currentUser.usedSpace * 100)/currentUser.diskSpace + '%'}}></div>
+                        <div className={styles.currentUser__diskSpace__memory_free} style={{width: 100 - ((currentUser.usedSpace * 100)/currentUser.diskSpace) + '%'}}></div>
+                    </div>
+                </div>
+            </div>)}
             <div></div>
             <div className={styles.signOut} onClick={() => dispatch(signOutUser())}>
                 <img src={SignOutIcon} alt="sign out"/>

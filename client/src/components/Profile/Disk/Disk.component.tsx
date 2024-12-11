@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import {useAppSelector} from "../../../hooks/useAppSelector";
 import {useAppDispatch} from "../../../hooks/useAppDispatch";
-import {createFile, getUserFiles, returnToPrevDir, uploadFile} from "../../../store/actions/fileAction";
+import {createFile, getUserFiles, returnToPrevDir, searchFiles, uploadFile} from "../../../store/actions/fileAction";
 import FileList from "./FileList.component";
 import styles from './Disk.module.sass'
 import CreateDir from "./CreateDir.component";
@@ -20,6 +20,8 @@ const Disk = () => {
     const [newDirName, setNewDirname] = useState<string>('')
     const [backBtn, setBackBtn] = useState<boolean>(true)
     const [dragEnter, setDragEnter] = useState<boolean>(false)
+    const [search, setSearch] = useState<string>('')
+
 
     const createDirPopupClose = () => setIsNewDirPopup(false);
     const uploadFilePopupClose = () => setIsNewFilePopup(false);
@@ -92,6 +94,13 @@ const Disk = () => {
 
     if(isLoading) return (<Loader/>)
 
+    const searchHandler = (e:React.ChangeEvent<HTMLInputElement>)=> {
+        setSearch(e.target.value)
+        e.target.value
+            ? dispatch(searchFiles(e.target.value))
+            : dispatch(getUserFiles(currentDir, sort))
+    }
+
     return (
         <Fragment>
             <CreateDir
@@ -114,6 +123,8 @@ const Disk = () => {
             />
             <main className={styles.main}>
                 <NavPanel
+                    search={search}
+                    searchHandler={searchHandler}
                     backBtn={backBtn}
                     backClickHolder={backClickHolder}
                     setIsNewDirPopup={setIsNewDirPopup}

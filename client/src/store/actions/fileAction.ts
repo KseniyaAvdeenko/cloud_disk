@@ -5,7 +5,7 @@ import {IFile, IUploadedFile} from "../../interface/IFile";
 import {ntfReducer} from "../reducers/ntfReducer";
 import {AxiosProgressEvent} from "axios";
 import {addUploadedFile, changeUploadedFile, showUploadedFiles} from "./uploadedFilesAction";
-import {Sort} from "../../interface/IIntialStates";
+
 
 export const getUserFiles = (dirId: string | null, sort: string) => async (dispatch: AppDispatch) => {
     try {
@@ -105,3 +105,15 @@ export const deleteFile = (fileId: string, dirId: string | null) => async (dispa
 }
 
 export const changeSorting = (sort: string) => async (dispatch: AppDispatch) => dispatch(fileReducer.actions.changeSortingMethod(sort))
+
+export const searchFiles = (search: string) => async (dispatch: AppDispatch) => {
+    try {
+        let url = `/files/search?search=${search}`;
+        dispatch(fileReducer.actions.fetchFiles())
+        const resp = await axiosInstance.get<IFile[]>(url);
+        dispatch(fileReducer.actions.loadFilesSuccess(resp.data))
+    } catch (e) {
+        dispatch(fileReducer.actions.loadFilesFail())
+        dispatch(ntfReducer.actions.setError('loading files fail'))
+    }
+}

@@ -1,0 +1,140 @@
+.d-flex, .currentUser__diskSpace__memory, .signOut, .inputContainerCommon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.grid, .currentUser__diskSpace, .currentUser, .sidebar {
+  display: -ms-grid;
+  display: grid;
+}
+
+.commonButton {
+  padding: 1.5rem 2.5rem;
+  width: fit-content;
+  background-color: #1F3A5F;
+  border-radius: 1.5rem;
+  border: none;
+  outline: none;
+  color: #FFFFFF;
+  font-size: 1.8rem;
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.commonButton:hover, .commonButton:active {
+  background: #3D5A80;
+}
+
+.inputContainerCommon {
+  width: 100%;
+  margin-bottom: 2rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.inputContainerCommon > label {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+.inputContainerCommon > input {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  color: #0F1C2E;
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.inputContainerCommon > input:focus {
+  border: none;
+  outline: none;
+}
+.inputContainerCommon > input::placeholder {
+  color: #374357;
+}
+
+.sidebar {
+  border-right: 0.1rem solid #374357;
+  grid-auto-rows: min-content;
+  row-gap: 1rem;
+  padding: 1rem;
+}
+
+.signOut {
+  cursor: pointer;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: start;
+}
+.signOut > img {
+  margin-right: 1rem;
+}
+
+.currentUser {
+  grid-auto-rows: min-content;
+  row-gap: 1rem;
+}
+.currentUser > div {
+  justify-self: center;
+}
+.currentUser__avatar {
+  justify-self: center;
+  border-radius: 50%;
+  width: 7rem;
+  cursor: pointer;
+  height: 7rem;
+}
+.currentUser__avatar > input[type=file] {
+  display: none;
+}
+.currentUser__diskSpace {
+  width: 100%;
+  grid-auto-rows: min-content;
+}
+.currentUser__diskSpace__memory {
+  height: 1rem;
+  width: 100%;
+  border-radius: 1rem;
+  background: #cee8ff;
+  margin-top: 1rem;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: start;
+  row-gap: 1rem;
+}
+.currentUser__diskSpace__memory_used, .currentUser__diskSpace__memory_free {
+  height: 1rem;
+  border-radius: 1rem;
+}
+.currentUser__diskSpace__memory_free {
+  background: #cee8ff;
+}
+.currentUser__diskSpace__memory_used {
+  background: #1F3A5F;
+}
+
+/*# sourceMappingURL=Sidebar.module.css.map */
