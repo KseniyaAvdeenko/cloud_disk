@@ -1,0 +1,148 @@
+@import "../../../../App.module"
+
+.fileListTable
+  @include flex(column, start, start)
+  width: 100%
+
+.fileListIcons
+  @extend .grid
+  grid-template-columns: repeat(4, 1fr)
+  gap: 1rem
+  grid-auto-rows: min-content
+
+.row, .rowHead
+  width: 100%
+  @extend .grid
+  grid-template-columns: 4rem 42rem 4.5rem repeat(2, 1fr) 4.5rem
+  border-bottom: .1rem solid $bg300
+  gap: 1rem
+  padding: .5rem 0
+
+  &__date
+    grid-column-start: 4
+
+  &__name
+    justify-self: start !important
+    grid-column-start: 2
+
+  &__fileIcon
+    grid-column-start: 1
+
+  &__size
+    grid-column-start: 5
+
+  &__download
+    grid-column-start: 3
+
+  &__delete
+    grid-column-start: 6
+
+  &__download,
+  &__delete,
+  &__fileIcon,
+  &__name,
+  &__date,
+  &__size
+    @extend .cell
+
+.rowHead
+  border-bottom: .2rem solid $bg300
+
+.row
+  transition: all .5s ease
+  cursor: pointer
+
+  &:hover
+    @include transform(scale(1.02))
+
+
+  &__download,
+  &__delete,
+  &__fileIcon
+    cursor: pointer
+
+  &__fileIcon > svg > path
+    fill: $bg200
+    @include transition(all)
+
+    & > svg
+      &:hover > path
+        stroke: $primary300
+
+  &__delete
+    & > svg
+      &:hover > path
+        fill: $primary300
+
+  &:hover > &__fileIcon > svg > path
+    fill: $primary300
+
+
+.cell
+  padding: .5rem 1rem
+  justify-self: center
+
+
+.rowIcon
+  @extend .grid
+  align-self: center
+  grid-auto-rows: min-content
+  row-gap: 1rem
+
+
+
+  &:hover
+    @include transform(scale(1.02))
+
+
+  &__container
+    &_row, &_column
+      @extend .grid
+
+    &_row
+      grid-template-columns: repeat(2, 1fr)
+    &_column
+      grid-template-rows: repeat(2, 1fr)
+
+  &__name
+    position: relative
+    &:before
+      content: attr(data-tip)
+      display: none
+      position: absolute
+      left: 0
+      bottom: -10%
+      width: fit-content
+      padding: 1rem
+      background: $accent100
+      color: $text100
+      font-size: 1.4rem
+      border-radius: 1rem
+    &:hover::before
+      display: inline-block
+
+  &__download,
+  &__delete,
+  &__fileIcon,
+  &__name,
+  &__date,
+  &__size
+    padding: .5rem 1rem
+
+  &__download,
+  &__delete,
+  &__fileIcon
+    cursor: pointer
+
+  &__fileIcon > svg > path
+    @include transition(all)
+
+  &:hover > &__container_row> &__fileIcon > svg > path
+    fill: $primary300
+
+  &__download:hover > svg > path,
+  &__delete:hover > svg > path
+    fill: $primary300
+
+  &__download:hover > svg > path
+    stroke: $primary300

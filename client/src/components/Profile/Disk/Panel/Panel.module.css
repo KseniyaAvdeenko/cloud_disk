@@ -1,15 +1,15 @@
-.d-flex, .centered, .dragFiles, .inputContainer > label[for=file], .form__container, .form, .main, .inputContainerCommon, .inputContainer {
+.d-flex, .buttons__button, .buttons > label, .panel__button, .panel__items, .inputContainerCommon, .panel__searching {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.grid {
+.grid, .buttons, .panel {
   display: -ms-grid;
   display: grid;
 }
 
-.commonButton {
+.commonButton, .buttons__button, .panel__button {
   padding: 1.5rem 2.5rem;
   width: fit-content;
   background-color: #1F3A5F;
@@ -22,11 +22,11 @@
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
-.commonButton:hover, .commonButton:active {
+.commonButton:hover, .buttons__button:hover, .panel__button:hover, .commonButton:active, .buttons__button:active, .panel__button:active {
   background: #3D5A80;
 }
 
-.inputContainerCommon, .inputContainer {
+.inputContainerCommon, .panel__searching {
   width: 100%;
   margin-bottom: 2rem;
   -webkit-box-orient: vertical;
@@ -40,11 +40,11 @@
   -ms-flex-pack: center;
   justify-content: center;
 }
-.inputContainerCommon > label, .inputContainer > label {
+.inputContainerCommon > label, .panel__searching > label {
   margin-bottom: 1rem;
   font-size: 1.8rem;
 }
-.inputContainerCommon > input, .inputContainer > input {
+.inputContainerCommon > input, .panel__searching > input {
   width: 100%;
   padding: 1rem;
   border-radius: 1rem;
@@ -55,34 +55,40 @@
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
-.inputContainerCommon > input:focus, .inputContainer > input:focus {
+.inputContainerCommon > input:focus, .panel__searching > input:focus {
   border: none;
   outline: none;
 }
-.inputContainerCommon > input::placeholder, .inputContainer > input::placeholder {
+.inputContainerCommon > input::placeholder, .panel__searching > input::placeholder {
   color: #374357;
 }
 
-.main {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
-  align-items: start;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
-  justify-content: start;
+.panel {
+  grid-auto-rows: min-content;
+  row-gap: 2rem;
   width: 100%;
-  padding: 2rem;
+  margin-bottom: 3rem;
 }
-
-.form {
-  -webkit-box-orient: vertical;
+.panel__items {
+  width: 100%;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+.panel__button {
+  padding: 1rem 2rem;
+  margin: 1rem;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -90,32 +96,25 @@
   -ms-flex-pack: center;
   justify-content: center;
 }
-.form > h1 {
-  font-size: 2rem;
-  margin-bottom: 3.1rem;
+.panel__button > p {
+  margin-right: 1rem;
 }
-.form__container {
-  width: 100%;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-.inputContainer {
+.panel__searching {
+  width: 20%;
   margin-bottom: 0;
 }
-.inputContainer > label[for=file] {
-  border: 0.1rem dashed #374357;
-  border-radius: 1rem;
-  width: 100%;
-  height: 15rem;
+
+.buttons {
+  width: fit-content;
+  grid-template-columns: min-content min-content;
+  gap: 1rem;
+}
+.buttons > div {
+  justify-self: center;
+  align-self: center;
+  cursor: pointer;
+}
+.buttons > label {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -ms-flex-direction: row;
@@ -127,38 +126,17 @@
   -ms-flex-pack: center;
   justify-content: center;
 }
-.inputContainer > label[for=file] > input[type=file] {
-  display: none;
+.buttons > label > select {
+  padding: 0.5rem;
+  color: #FFFFFF;
+  background: #0F1C2E;
+  border: none;
+  outline: none;
 }
-
-.dragFiles {
-  width: 100%;
-  height: 15rem;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  border: 0.1rem dashed #acc2ef;
-  border-radius: 1rem;
-  font-size: 1.8rem;
-  -webkit-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
-.dragFiles__container {
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
-.centered {
-  width: 100%;
-  margin: 2rem 0;
+.buttons__button {
+  justify-self: end;
+  margin: 0;
+  padding: 1rem 2rem;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -ms-flex-direction: row;
@@ -170,5 +148,8 @@
   -ms-flex-pack: center;
   justify-content: center;
 }
+.buttons__button > p {
+  margin-right: 1rem;
+}
 
-/*# sourceMappingURL=Disk.module.css.map */
+/*# sourceMappingURL=Panel.module.css.map */

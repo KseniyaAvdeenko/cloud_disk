@@ -1,0 +1,205 @@
+.d-flex, .fileListTable, .inputContainerCommon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.grid, .rowIcon__container_row, .rowIcon__container_column, .rowIcon, .row, .rowHead, .fileListIcons {
+  display: -ms-grid;
+  display: grid;
+}
+
+.commonButton {
+  padding: 1.5rem 2.5rem;
+  width: fit-content;
+  background-color: #1F3A5F;
+  border-radius: 1.5rem;
+  border: none;
+  outline: none;
+  color: #FFFFFF;
+  font-size: 1.8rem;
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.commonButton:hover, .commonButton:active {
+  background: #3D5A80;
+}
+
+.inputContainerCommon {
+  width: 100%;
+  margin-bottom: 2rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.inputContainerCommon > label {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+.inputContainerCommon > input {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  color: #0F1C2E;
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.inputContainerCommon > input:focus {
+  border: none;
+  outline: none;
+}
+.inputContainerCommon > input::placeholder {
+  color: #374357;
+}
+
+.fileListTable {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: start;
+  width: 100%;
+}
+
+.fileListIcons {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  grid-auto-rows: min-content;
+}
+
+.row, .rowHead {
+  width: 100%;
+  grid-template-columns: 4rem 42rem 4.5rem repeat(2, 1fr) 4.5rem;
+  border-bottom: 0.1rem solid #374357;
+  gap: 1rem;
+  padding: 0.5rem 0;
+}
+.row__date, .rowHead__date {
+  grid-column-start: 4;
+}
+.row__name, .rowHead__name {
+  justify-self: start !important;
+  grid-column-start: 2;
+}
+.row__fileIcon, .rowHead__fileIcon {
+  grid-column-start: 1;
+}
+.row__size, .rowHead__size {
+  grid-column-start: 5;
+}
+.row__download, .rowHead__download {
+  grid-column-start: 3;
+}
+.row__delete, .rowHead__delete {
+  grid-column-start: 6;
+}
+.rowHead {
+  border-bottom: 0.2rem solid #374357;
+}
+
+.row {
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+.row:hover {
+  -webkit-transform: scale(1.02);
+  -ms-transform: scale(1.02);
+  transform: scale(1.02);
+}
+.row__download, .row__delete, .row__fileIcon {
+  cursor: pointer;
+}
+.row__fileIcon > svg > path {
+  fill: #1f2b3e;
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.row__fileIcon > svg > path > svg:hover > path {
+  stroke: #acc2ef;
+}
+.row__delete > svg:hover > path {
+  fill: #acc2ef;
+}
+.row:hover > .row__fileIcon > svg > path {
+  fill: #acc2ef;
+}
+
+.cell, .row__download, .row__delete, .row__fileIcon, .row__name, .row__date, .row__size, .rowHead__download, .rowHead__delete, .rowHead__fileIcon, .rowHead__name, .rowHead__date, .rowHead__size {
+  padding: 0.5rem 1rem;
+  justify-self: center;
+}
+
+.rowIcon {
+  align-self: center;
+  grid-auto-rows: min-content;
+  row-gap: 1rem;
+}
+.rowIcon:hover {
+  -webkit-transform: scale(1.02);
+  -ms-transform: scale(1.02);
+  transform: scale(1.02);
+}
+.rowIcon__container_row {
+  grid-template-columns: repeat(2, 1fr);
+}
+.rowIcon__container_column {
+  grid-template-rows: repeat(2, 1fr);
+}
+.rowIcon__name {
+  position: relative;
+}
+.rowIcon__name:before {
+  content: attr(data-tip);
+  display: none;
+  position: absolute;
+  left: 0;
+  bottom: -10%;
+  width: fit-content;
+  padding: 1rem;
+  background: #3D5A80;
+  color: #FFFFFF;
+  font-size: 1.4rem;
+  border-radius: 1rem;
+}
+.rowIcon__name:hover::before {
+  display: inline-block;
+}
+.rowIcon__download, .rowIcon__delete, .rowIcon__fileIcon, .rowIcon__name, .rowIcon__date, .rowIcon__size {
+  padding: 0.5rem 1rem;
+}
+.rowIcon__download, .rowIcon__delete, .rowIcon__fileIcon {
+  cursor: pointer;
+}
+.rowIcon__fileIcon > svg > path {
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.rowIcon:hover > .rowIcon__container_row > .rowIcon__fileIcon > svg > path {
+  fill: #acc2ef;
+}
+.rowIcon__download:hover > svg > path, .rowIcon__delete:hover > svg > path {
+  fill: #acc2ef;
+}
+.rowIcon__download:hover > svg > path {
+  stroke: #acc2ef;
+}
+
+/*# sourceMappingURL=Files.module.css.map */

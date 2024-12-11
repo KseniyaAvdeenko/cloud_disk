@@ -5,103 +5,8 @@
   width: 100%
   padding: 2rem
 
-  &__buttons
-    margin-bottom: 2rem
-    width: 100%
-    @include flex(row, space-between, center)
-
-    &__button
-      @extend .commonButton
-      padding: 1rem 2rem
-      margin: 1rem
-
-  &__sorting
-    & > select
-      border-radius: 1rem
-      padding: 1rem
-      color: $text100
-      background: $primary100
-      border: none
-      outline: none
-
-  &__searching
-    @extend .inputContainerCommon
-    width: 20%
-    margin-bottom: 0
-
-.fileListTable
-  @extend .grid
-  width: 100%
-  grid-auto-rows: min-content
-
-.row, .rowHead
-  @extend .grid
-  grid-template-columns: .5fr 3.5fr repeat(3, 1fr) .5fr
-  border-bottom: .1rem solid $bg300
-  gap: 1rem
-  padding: .5rem 0
-
-.rowHead
-  border-bottom: .2rem solid $bg300
-
-.row
-  transition: all .5s ease
-  cursor: pointer
-
-  &:hover
-    @include transform(scale(1.02))
-
-  &__download,
-  &__delete,
-  &__fileIcon,
-  &__name,
-  &__date,
-  &__size
-    @extend .cell
-
-  &__date
-    grid-column-start: 4
-
-  &__name
-    justify-self: start !important
-    grid-column-start: 2
-
-  &__fileIcon
-    grid-column-start: 1
-
-  &__size
-    grid-column-start: 5
-
-  &__download,
-  &__delete,
-  &__fileIcon
-    cursor: pointer
-
-  &__fileIcon > svg > path
-    fill: $bg200
-    @include transition(all)
-
-  &__download
-    grid-column-start: 3
-
-    & > svg
-      &:hover > path
-        stroke: $primary300
-
-  &__delete
-    grid-column-start: 6
-
-    & > svg
-      &:hover > path
-        fill: $primary300
-
-  &:hover > &__fileIcon > svg > path
-    fill: $primary300
 
 
-.cell
-  padding: .5rem 1rem
-  justify-self: center
 
 .form
   @include flex(column, center, center)
@@ -146,3 +51,4 @@
   width: 100%
   margin: 2rem 0
   @include flex(row, center, center)
+

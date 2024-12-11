@@ -1,0 +1,55 @@
+@import "../../../../App.module"
+
+.panel
+  @extend .grid
+  grid-auto-rows: min-content
+  row-gap: 2rem
+  width: 100%
+  margin-bottom: 3rem
+
+  &__items
+    width: 100%
+    @include flex(row, space-between, center)
+
+  &__button
+      @extend .commonButton
+      padding: 1rem 2rem
+      margin: 1rem
+      @include flex(row, center, center)
+
+      & > p
+        margin-right: 1rem
+
+  &__searching
+    @extend .inputContainerCommon
+    width: 20%
+    margin-bottom: 0
+
+.buttons
+  @extend .grid
+  width: fit-content
+  grid-template-columns: min-content min-content
+  gap: 1rem
+  & > div
+    justify-self: center
+    align-self: center
+    cursor: pointer
+
+  & > label
+    @include flex(row, center, center)
+    & > select
+      padding: .5rem
+      color: $text100
+      background: $bg100
+      border: none
+      outline: none
+
+  &__button
+    justify-self: end
+    @extend .commonButton
+    margin: 0
+    padding: 1rem 2rem
+    @include flex(row, center, center)
+
+    & > p
+      margin-right: 1rem

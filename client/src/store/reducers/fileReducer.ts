@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IFilesInitial, Sort} from "../../interface/IIntialStates";
+import {IFilesInitial, Sort, View} from "../../interface/IIntialStates";
 import {IFile} from "../../interface/IFile";
 
 
@@ -9,7 +9,8 @@ const initialState: IFilesInitial = {
     currentDir: null,
     isLoading: false,
     dirStack: [],
-    sort: localStorage.sort || "type"
+    sort: localStorage.sort || "type",
+    view: localStorage.view || 'list'
 }
 export const fileReducer = createSlice({
     name: 'files',
@@ -46,6 +47,10 @@ export const fileReducer = createSlice({
         changeSortingMethod(state, action: PayloadAction<string>){
             state.sort = action.payload;
             localStorage.setItem('sort', action.payload)
+        },
+        changeFileView(state, action: PayloadAction<View>){
+            state.view = action.payload;
+            localStorage.setItem('view', action.payload)
         },
         createFileSuccess(state, action: PayloadAction<IFile>) {
             state.file = action.payload;

@@ -2,12 +2,12 @@ import React, {Fragment, useEffect, useState} from 'react';
 import {useAppSelector} from "../../../hooks/useAppSelector";
 import {useAppDispatch} from "../../../hooks/useAppDispatch";
 import {createFile, getUserFiles, returnToPrevDir, searchFiles, uploadFile} from "../../../store/actions/fileAction";
-import FileList from "./FileList.component";
+import FileList from "./Files/FileList.component";
 import styles from './Disk.module.sass'
 import CreateDir from "./CreateDir.component";
 import UploadFileForm from "./UploadFiles/UploadFileForm.component";
 import {hideUploadedFiles, removeUploadedFiles} from "../../../store/actions/uploadedFilesAction";
-import NavPanel from "./NavPanel.component";
+import Panel from "./Panel/Panel.component";
 import Loader from "../../../UI/Loader/Loader";
 
 
@@ -21,7 +21,6 @@ const Disk = () => {
     const [backBtn, setBackBtn] = useState<boolean>(true)
     const [dragEnter, setDragEnter] = useState<boolean>(false)
     const [search, setSearch] = useState<string>('')
-
 
     const createDirPopupClose = () => setIsNewDirPopup(false);
     const uploadFilePopupClose = () => setIsNewFilePopup(false);
@@ -122,7 +121,7 @@ const Disk = () => {
                 closeUploadFiles={closeUploadFiles}
             />
             <main className={styles.main}>
-                <NavPanel
+                <Panel
                     search={search}
                     searchHandler={searchHandler}
                     backBtn={backBtn}
