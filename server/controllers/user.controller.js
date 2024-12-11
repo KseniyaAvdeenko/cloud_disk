@@ -66,13 +66,22 @@ class UserController {
             next(e)
         }
     }
-    async updateCurrentUserAvatar(req, res, next) {
+    async uploadUserAvatar(req, res, next) {
         try {
             const {refreshToken} = req.cookies;
             if (!refreshToken) return next(ApiError.UnauthorizedError())
-            const data = req.files;
-
-            const user = await userService.updateCurrentUserAvatar(refreshToken, data)
+            const file = req.files;
+            const user = await userService.uploadCurrentUserAvatar(refreshToken, file)
+            res.json(user)
+        } catch (e) {
+            next(e)
+        }
+    }
+    async deleteUserAvatar(req, res, next) {
+        try {
+            const {refreshToken} = req.cookies;
+            if (!refreshToken) return next(ApiError.UnauthorizedError())
+            const user = await userService.deleteCurrentUserAvatar(refreshToken)
             res.json(user)
         } catch (e) {
             next(e)

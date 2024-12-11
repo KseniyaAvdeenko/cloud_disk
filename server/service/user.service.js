@@ -3,8 +3,9 @@ const bcrypt = require('bcrypt');
 const ApiError = require('../exceptions/apiError');
 const tokenService = require('./token.service');
 const UserDto = require('../dto/user.dto');
-const File = require("../models/file.model");
 const fs = require("fs");
+const Uuid = require('uuid')
+
 
 class UserService {
 
@@ -61,21 +62,20 @@ class UserService {
         return new UserDto(currentUser)
     }
 
-    async updateCurrentUserAvatar(refresh, data) {
-        const {avatar} = data;
-        console.log(data)
+    async uploadCurrentUserAvatar(refresh, data) {
         const currentUser = await this.getAuthorizedUser(refresh);
-        const dirPath = process.env.FILES_PATH + `\\${currentUser._id}\\userAvatar`;
-        const path = dirPath + `\\${avatar.name}`;
-        console.log(avatar)
-        console.log(dirPath)
-        console.log(path)
-        if (!fs.existsSync(dirPath)) fs.mkdirSync(dirPath)
+        const avatarName = Uuid.v4() + '.jpg';
+        data.mv(process.env.STATIC_PATH + '\\' + avatarName)
+        currentUser.avatar = avatarName
+        await currentUser.save();
+        return new UserDto(currentUser)
+    }
 
-
-        // avatar.mv(path);
-        // currentUser.avatar = path;
-        // currentUser.save()
+    async deleteCurrentUserAvatar(refresh) {
+        const currentUser = await this.getAuthorizedUser(refresh);
+        fs.unlinkSync(process.env.STATIC_PATH + '\\' + currentUser.avatar);
+        currentUser.avatar = null;
+        await currentUser.save();
         return new UserDto(currentUser)
     }
 }
