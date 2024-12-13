@@ -4,7 +4,7 @@
   display: flex;
 }
 
-.grid, .layout {
+.grid, .profile, .layout {
   display: -ms-grid;
   display: grid;
 }
@@ -93,6 +93,12 @@
 }
 .ntfs__success {
   background: rgba(206, 232, 255, 0.2);
+}
+
+.profile {
+  padding: 3rem 5%;
+  position: relative;
+  grid-template-columns: 1fr 4fr;
 }
 
 /*# sourceMappingURL=Layout.module.css.map */

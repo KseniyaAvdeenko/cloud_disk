@@ -1,7 +1,8 @@
 import React, {FC} from 'react';
 import styles from './Header.module.sass'
 import {useAppSelector} from "../../hooks/useAppSelector";
-import Logo from '../../assets/img/logo.png'
+import Logo from '../../assets/img/logo.svg'
+import {Link} from "react-router-dom";
 
 interface IHeaderProps {
     imgHeight: number;
@@ -14,7 +15,7 @@ const Header: FC<IHeaderProps> = ({imgHeight, activateSignUpForm, activateSignIn
 
     return (
         <header className={styles.header}>
-            <img src={Logo} height={imgHeight} alt="logo"/>
+            <Link to={'/'}><img src={Logo} height={imgHeight} alt="logo"/></Link>
             {!isAuth &&
                 (<div className={styles.header__auth}>
                     <button onClick={() => activateSignInForm()}>Sign In</button>

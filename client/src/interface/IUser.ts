@@ -6,6 +6,12 @@ export interface IUserBase {
     files?: []
 }
 
-export interface IUser extends IUserBase{
+export interface IUser extends IUserBase {
     _id: string
+}
+
+export interface IAuthUser {
+    accessToken: string;
+    refreshToken: string;
+    user: IUser
 }

@@ -10,10 +10,10 @@ import {View} from "../../interface/IIntialStates";
 
 export const getUserFiles = (dirId: string | null, sort: string) => async (dispatch: AppDispatch) => {
     try {
-        let url = `/files`
-        if(dirId) url = `/files?parent=${dirId}`;
-        if(sort) url = `/files?sort=${sort}`;
-        if(dirId && sort) url = `/files?parent=${dirId}&sort=${sort}`;
+        let url = `api/files`
+        if(dirId) url = `api/files?parent=${dirId}`;
+        if(sort) url = `api/files?sort=${sort}`;
+        if(dirId && sort) url = `api/files?parent=${dirId}&sort=${sort}`;
         dispatch(fileReducer.actions.fetchFiles())
         const resp = await axiosInstance.get<IFile[]>(url);
         dispatch(fileReducer.actions.loadFilesSuccess(resp.data))
@@ -25,7 +25,7 @@ export const getUserFiles = (dirId: string | null, sort: string) => async (dispa
 
 export const createFile = (dirId: string | null, name: string) => async (dispatch: AppDispatch) => {
     try {
-        const resp = await axiosInstance.post<IFile>(`/files`, {name, parent: dirId, type: "dir"});
+        const resp = await axiosInstance.post<IFile>(`api/files`, {name, parent: dirId, type: "dir"});
         dispatch(fileReducer.actions.createFileSuccess(resp.data))
         dispatch(ntfReducer.actions.setSuccess('file created successfully'))
         dispatch(getUserFiles(dirId, localStorage.sort || 'type'))
@@ -57,7 +57,7 @@ export const uploadFile = (dirId: string | null, file: File) => async (dispatch:
         dispatch(addUploadedFile(uploadedFile));
         const upFile = structuredClone(uploadedFile)
         const resp = await axiosInstance.post<IFile>(
-            `/files/upload`,
+            `api/files/upload`,
             formData,
             {
                 onUploadProgress: (progressEvent: AxiosProgressEvent) => {
@@ -77,7 +77,7 @@ export const uploadFile = (dirId: string | null, file: File) => async (dispatch:
 
 export const downLoadFile = (file: IFile) => async (dispatch: AppDispatch) => {
     try {
-        const resp = await axiosInstance.get(`/files/download?id=${file._id}`, {responseType: 'blob'})
+        const resp = await axiosInstance.get(`api/files/download?id=${file._id}`, {responseType: 'blob'})
         if (resp.status === 200) {
             const downloadUrl = URL.createObjectURL(resp.data);
             const link = document.createElement('a');
@@ -94,7 +94,7 @@ export const downLoadFile = (file: IFile) => async (dispatch: AppDispatch) => {
 
 export const deleteFile = (fileId: string, dirId: string | null) => async (dispatch: AppDispatch) => {
     try {
-        const resp = await axiosInstance.delete<{ message: string }>(`/files/?id=${fileId}`);
+        const resp = await axiosInstance.delete<{ message: string }>(`api/files/?id=${fileId}`);
         dispatch(fileReducer.actions.deleteFileSuccess())
         resp.data.message
             ? dispatch(ntfReducer.actions.setSuccess(resp.data.message))
@@ -109,7 +109,7 @@ export const changeSorting = (sort: string) => async (dispatch: AppDispatch) => 
 
 export const searchFiles = (search: string) => async (dispatch: AppDispatch) => {
     try {
-        let url = `/files/search?search=${search}`;
+        let url = `api/files/search?search=${search}`;
         dispatch(fileReducer.actions.fetchFiles())
         const resp = await axiosInstance.get<IFile[]>(url);
         dispatch(fileReducer.actions.loadFilesSuccess(resp.data))

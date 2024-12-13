@@ -57,8 +57,7 @@
 
 
   &__download,
-  &__delete,
-  &__fileIcon
+  &__delete
     cursor: pointer
 
   &__fileIcon > svg > path
@@ -69,10 +68,14 @@
       &:hover > path
         stroke: $primary300
 
-  &__delete
-    & > svg
-      &:hover > path
-        fill: $primary300
+
+  &__download:hover > svg > path
+    stroke: $primary300
+
+  &__download:hover > svg > path,
+  &__delete:hover > svg > path
+    fill: $primary300
+
 
   &:hover > &__fileIcon > svg > path
     fill: $primary300
@@ -88,8 +91,6 @@
   align-self: center
   grid-auto-rows: min-content
   row-gap: 1rem
-
-
 
   &:hover
     @include transform(scale(1.02))
@@ -130,8 +131,7 @@
     padding: .5rem 1rem
 
   &__download,
-  &__delete,
-  &__fileIcon
+  &__delete
     cursor: pointer
 
   &__fileIcon > svg > path
@@ -140,7 +140,7 @@
   &:hover > &__container_row> &__fileIcon > svg > path
     fill: $primary300
 
-  &__download:hover > svg > path,
+
   &__delete:hover > svg > path
     fill: $primary300
 

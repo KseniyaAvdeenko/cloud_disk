@@ -1,15 +1,15 @@
-.d-flex, .link, .linkActive, .signOut, .inputContainerCommon {
+.d-flex, .form__container, .main, .inputContainerCommon, .inputContainer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.grid, .sidebar {
+.grid, .form {
   display: -ms-grid;
   display: grid;
 }
 
-.commonButton {
+.commonButton, .button {
   padding: 1.5rem 2.5rem;
   width: fit-content;
   background-color: #1F3A5F;
@@ -22,11 +22,11 @@
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
-.commonButton:hover, .commonButton:active {
+.commonButton:hover, .button:hover, .commonButton:active, .button:active {
   background: #3D5A80;
 }
 
-.inputContainerCommon {
+.inputContainerCommon, .inputContainer {
   width: 100%;
   margin-bottom: 2rem;
   -webkit-box-orient: vertical;
@@ -40,11 +40,11 @@
   -ms-flex-pack: center;
   justify-content: center;
 }
-.inputContainerCommon > label {
+.inputContainerCommon > label, .inputContainer > label {
   margin-bottom: 1rem;
   font-size: 1.8rem;
 }
-.inputContainerCommon > input {
+.inputContainerCommon > input, .inputContainer > input {
   width: 100%;
   padding: 1rem;
   border-radius: 1rem;
@@ -55,58 +55,55 @@
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
-.inputContainerCommon > input:focus {
+.inputContainerCommon > input:focus, .inputContainer > input:focus {
   border: none;
   outline: none;
 }
-.inputContainerCommon > input::placeholder {
+.inputContainerCommon > input::placeholder, .inputContainer > input::placeholder {
   color: #374357;
 }
 
-.sidebar {
-  border-right: 0.1rem solid #374357;
-  grid-auto-rows: min-content;
-  row-gap: 2.5rem;
-  padding: 1rem;
+.main {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100%;
+  padding: 2rem;
 }
 
-.link, .linkActive, .signOut {
-  text-decoration: none;
-  color: #FFFFFF;
-  font-size: 1.8rem;
+.form {
+  grid-auto-rows: min-content;
+  row-gap: 2.5rem;
+}
+.form__container {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  align-items: end;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   justify-content: start;
-  -webkit-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
 }
-.link > p, .linkActive > p, .signOut > p {
-  margin-left: 1rem;
-}
-.link:hover, .linkActive:hover, .signOut:hover {
-  color: #acc2ef;
-}
-.link:hover > svg > path, .linkActive:hover > svg > path, .signOut:hover > svg > path {
-  fill: #acc2ef;
+.form__container > button {
+  margin-left: 2rem;
 }
 
-.linkActive {
-  color: #acc2ef;
-}
-.linkActive > svg > path {
-  fill: #acc2ef;
+.button {
+  padding: 1rem 2rem;
 }
 
-.signOut {
-  cursor: pointer;
+.inputContainer {
+  margin-bottom: 0;
 }
 
-/*# sourceMappingURL=Sidebar.module.css.map */
+/*# sourceMappingURL=Settings.module.css.map */

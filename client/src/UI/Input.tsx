@@ -4,13 +4,14 @@ interface IInputProps {
     onChangeHandler: Function;
     value: string;
     type: string;
-    placeHolder: string;
+    placeHolder?: string;
     name: string;
     id: string;
     minLength?: number
     maxLength?: number
     required: boolean;
-    multiple?: boolean
+    multiple?: boolean;
+    accept?: string
 }
 
 const Input: FC<IInputProps> = ({
@@ -23,9 +24,20 @@ const Input: FC<IInputProps> = ({
                                     minLength,
                                     id,
                                     name,
-                                    required
+                                    required,
+                                    accept
                                 }) => {
-    return type === 'file' ?(
+    return type === 'file' ? (
+        <input
+            type={type}
+            name={name}
+            id={id}
+            required={required}
+            onChange={e => onChangeHandler(e)}
+            accept={accept}
+            multiple={multiple}
+        />
+    ) : (
         <input
             type={type}
             value={value}
@@ -36,16 +48,6 @@ const Input: FC<IInputProps> = ({
             onChange={e => onChangeHandler(e)}
             minLength={minLength}
             maxLength={maxLength}
-        />
-    ): (<input
-            type={type}
-            value={value}
-            placeholder={placeHolder}
-            name={name}
-            id={id}
-            required={required}
-            onChange={e => onChangeHandler(e)}
-            multiple={multiple}
         />)
 };
 

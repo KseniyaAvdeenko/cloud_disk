@@ -28,13 +28,9 @@ class UserService {
 
     async signIn(email, password) {
         const user = await User.findOne({email: email});
-        if (!user) {
-            throw ApiError.BadRequestError(`User does not exist`, [])
-        }
+        if (!user) throw ApiError.BadRequestError(`User does not exist`, [])
         const isPassEqual = bcrypt.compare(password, user.password)
-        if (!isPassEqual) {
-            throw ApiError.BadRequestError(`Incorrect password`, [])
-        }
+        if (!isPassEqual) throw ApiError.BadRequestError(`Incorrect password`, [])
         const userDto = new UserDto(user);
         const tokens = tokenService.generateTokens({...userDto})
         await tokenService.saveToken(userDto.id, tokens.refreshToken)
@@ -52,7 +48,7 @@ class UserService {
         const userDto = new UserDto(currentUser)
         const tokens = tokenService.generateTokens({...userDto})
         await tokenService.saveToken(userDto.id, tokens.refreshToken)
-        return {...tokens}
+        return {...tokens, user: userDto}
     }
 
     async getCurrentUser(refresh) {
@@ -65,7 +61,7 @@ class UserService {
     async uploadCurrentUserAvatar(refresh, data) {
         const currentUser = await this.getAuthorizedUser(refresh);
         const avatarName = Uuid.v4() + '.jpg';
-        data.mv(process.env.STATIC_PATH + '\\' + avatarName)
+        data.file.mv(process.env.STATIC_PATH + '\\' + avatarName)
         currentUser.avatar = avatarName
         await currentUser.save();
         return new UserDto(currentUser)
@@ -78,38 +74,18 @@ class UserService {
         await currentUser.save();
         return new UserDto(currentUser)
     }
+
+    async updateCurrentUserData(refresh, data) {
+        const currentUser = await this.getAuthorizedUser(refresh);
+        if (data.email) currentUser.email = data.email;
+        if (data.password) currentUser.password = data.password;
+        await currentUser.save()
+        const userDto = new UserDto(currentUser);
+        const tokens = tokenService.generateTokens({...userDto})
+        await tokenService.saveToken(userDto.id, tokens.refreshToken)
+        return {...tokens, user: userDto}
+    }
 }
 
 module.exports = new UserService();
 
-// const currentUser = await userService.getAuthorizedUser(refresh);
-//         const parent = await File.findOne({userId: currentUser._id, _id: id})
-//         if (currentUser.usedSpace + file.size > currentUser.diskSpace) return ApiError.BadRequestError('no free space')
-//         currentUser.usedSpace = currentUser.usedSpace + file.size;
-//         let path;
-//         let filePath;
-//         if (parent) {
-//             path = process.env.FILES_PATH + `\\${currentUser._id}\\${parent.path}\\${file.name}`
-//             filePath = parent.path + '\\' + file.name;
-//         } else {
-//             path = process.env.FILES_PATH + `\\${currentUser._id}\\${file.name}`
-//             filePath = file.name;
-//         }
-//         if (fs.existsSync(path)) return ApiError.BadRequestError('File already exists')
-//         file.mv(path);
-//         const type = file.name.split('.').pop()
-//         const dbFile = await new File({
-//             name: file.name,
-//             type,
-//             size: file.size,
-//             path: filePath,
-//             parent: parent?._id,
-//             userId: currentUser._id
-//         })
-//         if (parent) {
-//             parent.children.push(dbFile._id);
-//             await parent.save()
-//         }
-//         await dbFile.save();
-//         await currentUser.save();
-//         return dbFile;

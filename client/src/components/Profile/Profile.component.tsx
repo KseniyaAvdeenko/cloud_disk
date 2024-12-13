@@ -1,19 +1,14 @@
-import React, {Fragment} from 'react';
-import styles from './Profile.module.sass'
-import Sidebar from "./Sidebar/Sidebar.component";
+import React from 'react';
 import Disk from "./Disk/Disk.component";
+import ProfileLayout from "../Layout/ProfileLayout.component";
 
 
-const ProfileComponent = () => {
+const Profile = () => {
     return (
-        <Fragment>
-            <div className={styles.profile}>
-                <Sidebar/>
-                <Disk/>
-            </div>
-        </Fragment>
-
+        <ProfileLayout>
+            <Disk/>
+        </ProfileLayout>
     );
 };
 
-export default ProfileComponent;
+export default Profile;

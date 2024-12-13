@@ -1,0 +1,24 @@
+@import "../../../App.module"
+
+.main
+  @include flex(column, center, center)
+  width: 100%
+  padding: 2rem
+
+.form
+  @extend .grid
+  grid-auto-rows: min-content
+  row-gap: 2.5rem
+  &__container
+    @include flex(row, start, end)
+    & > button
+      margin-left: 2rem
+
+.button
+  @extend .commonButton
+  padding: 1rem 2rem
+
+
+.inputContainer
+  @extend .inputContainerCommon
+  margin-bottom: 0

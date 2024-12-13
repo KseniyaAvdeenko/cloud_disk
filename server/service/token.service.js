@@ -42,13 +42,11 @@ class TokenService {
     }
 
     async getToken(refresh) {
-        const token = await TokenModel.findOne({refresh: refresh});
-        return token
+        return TokenModel.findOne({refresh: refresh});
     }
 
     async deleteToken(refresh) {
-        const tokenData = await TokenModel.deleteOne({refresh: refresh})
-        return tokenData;
+        return TokenModel.deleteOne({refresh: refresh});
     }
 }
 

@@ -122,7 +122,7 @@
   -ms-transform: scale(1.02);
   transform: scale(1.02);
 }
-.row__download, .row__delete, .row__fileIcon {
+.row__download, .row__delete {
   cursor: pointer;
 }
 .row__fileIcon > svg > path {
@@ -134,7 +134,10 @@
 .row__fileIcon > svg > path > svg:hover > path {
   stroke: #acc2ef;
 }
-.row__delete > svg:hover > path {
+.row__download:hover > svg > path {
+  stroke: #acc2ef;
+}
+.row__download:hover > svg > path, .row__delete:hover > svg > path {
   fill: #acc2ef;
 }
 .row:hover > .row__fileIcon > svg > path {
@@ -184,7 +187,7 @@
 .rowIcon__download, .rowIcon__delete, .rowIcon__fileIcon, .rowIcon__name, .rowIcon__date, .rowIcon__size {
   padding: 0.5rem 1rem;
 }
-.rowIcon__download, .rowIcon__delete, .rowIcon__fileIcon {
+.rowIcon__download, .rowIcon__delete {
   cursor: pointer;
 }
 .rowIcon__fileIcon > svg > path {
@@ -195,7 +198,7 @@
 .rowIcon:hover > .rowIcon__container_row > .rowIcon__fileIcon > svg > path {
   fill: #acc2ef;
 }
-.rowIcon__download:hover > svg > path, .rowIcon__delete:hover > svg > path {
+.rowIcon__delete:hover > svg > path {
   fill: #acc2ef;
 }
 .rowIcon__download:hover > svg > path {

@@ -9,6 +9,7 @@ import Profile from "./components/Profile/Profile.component";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Header from "./components/Header/Header.component";
 import {IAuthForm} from "./interface/IIntialStates";
+import ProfileSettings from "./components/Profile/ProfileSettings/ProfileSettings.component";
 
 function App() {
     const {accessToken, isAuth} = useAppSelector(state => state.authReducer);
@@ -31,10 +32,7 @@ function App() {
     })
 
     useEffect(() => {
-        if (accessToken) {
-            dispatch(checkAuth())
-            dispatch(getCurrentUser())
-        }
+        if (accessToken) dispatch(checkAuth())
     }, [accessToken])
 
     return (
@@ -54,11 +52,11 @@ function App() {
                     </Routes>
                     : <Routes>
                         <Route path={'/'} element={<Profile/>}/>
+                        <Route path={'/settings'} element={<ProfileSettings/>}/>
                     </Routes>
                 }
             </Layout>
         </BrowserRouter>
-
     );
 }
 
